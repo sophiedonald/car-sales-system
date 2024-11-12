@@ -1,5 +1,9 @@
+
+import javax.swing.plaf.ColorUIResource;
+import javax.swing.plaf.synth.Region;
+
 public class Car{
-    private String carReg;
+    private static String carReg;
     private String carMake;
     private String carModel;
     private int carMileage;
@@ -8,15 +12,25 @@ public class Car{
     private String carFeatures;
     private static int carCount;
     
+    
+    // private enum currentField{
+    //     reg,
+    //     make,
+    //     model,
+    //     mileage,
+    //     age,
+    //     colour,
+    //     features
+    // }
 
-    public Car(String carReg, String carMake, String carModel/*, int carMileage, int carAge, String carColour, String carFeatures*/){
-        this.carReg = carReg;
-        this.carMake = carMake;
-        this.carModel = carModel;
-        // this.carMileage = carMileage;
-        // this.carAge = carAge;
-        // this.carColour = carColour;
-        // this.carFeatures = carFeatures;
+    public Car(String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){
+        this.carReg = carReg.toUpperCase();
+        this.carMake = carMake.toLowerCase();
+        this.carModel = carModel.toLowerCase();
+        this.carMileage = carMileage;
+        this.carAge = carAge;
+        this.carColour = carColour.toLowerCase();
+        this.carFeatures = carFeatures.toLowerCase();
 
         carCount++;
     }
@@ -24,6 +38,35 @@ public class Car{
     public static int getCarCount() {
         return carCount;
     }
+
+    public static void setCarReg(String reg){
+        this.carReg = reg;
+    }
+    // public void setCarMake(){
+    //     this.carMake = MenuSelection.userInput;
+    // }
+    // public void setCarModel(){
+    //     this.carModel = MenuSelection.userInput;
+    // }
+    // public void setCarMileage(){
+        
+        
+    // }
+    // public void setCarAge(){
+    //     this.carReg = MenuSelection.userInput;
+    // }
+    // public void setCarColour(){
+    //     this.carColour = MenuSelection.userInput;
+    // }
+    // public void setCarFeatures(){
+    //     this.carFeatures = MenuSelection.userInput;
+    // }
+
+
+
+
+
+
 
     // public String getToString() {
     //     return toString;
@@ -35,7 +78,7 @@ public class Car{
 
 
     public String toString() {
-        return "Registration:\t" + carReg + "\nMake:\t\t" + carMake + "\nModel:\t\t" + carModel;
+        return "Registration:\t" + carReg + "\nMake:\t\t" + carMake + "\nModel:\t\t" + carModel + "\nMileage:\t" + carMileage + "\nAge:\t\t" + carAge + "\nColour:\t\t" + carColour + "\nFeatures:\t" + carFeatures;
     }
 
 }
