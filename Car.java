@@ -1,12 +1,13 @@
 public class Car{
     private String carReg;
-    public String carMake;
-    public String carModel;
-    public int carMileage;
-    public int carAge;
-    public String carColour;
-    public String carFeatures;
-
+    private String carMake;
+    private String carModel;
+    private int carMileage;
+    private int carAge;
+    private String carColour;
+    private String carFeatures;
+    private static int carCount;
+    
 
     public Car(String carReg, String carMake, String carModel/*, int carMileage, int carAge, String carColour, String carFeatures*/){
         this.carReg = carReg;
@@ -16,7 +17,12 @@ public class Car{
         // this.carAge = carAge;
         // this.carColour = carColour;
         // this.carFeatures = carFeatures;
-        DigitalArtefact.carCount++;
+
+        carCount++;
+    }
+
+    public static int getCarCount() {
+        return carCount;
     }
 
     // public String getToString() {
