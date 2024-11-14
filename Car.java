@@ -1,9 +1,7 @@
 
-import javax.swing.plaf.ColorUIResource;
-import javax.swing.plaf.synth.Region;
 
 public class Car{
-    private static String carReg;
+    private String carReg; //if naming static, then all cars have the same reg
     private String carMake;
     private String carModel;
     private int carMileage;
@@ -39,9 +37,9 @@ public class Car{
         return carCount;
     }
 
-    public static void setCarReg(String reg){
-        this.carReg = reg;
-    }
+    // public void setCarReg(String reg){
+    //     this.carReg = reg;
+    // }
     // public void setCarMake(){
     //     this.carMake = MenuSelection.userInput;
     // }

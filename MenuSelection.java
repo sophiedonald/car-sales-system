@@ -82,7 +82,7 @@ public class MenuSelection {
             case "reg":
                 System.out.println("What is the registration plate of the car?");
                 userInput = scanner.nextLine();
-                Car.setCarReg(userInput);
+                
 
             case "make":
 
