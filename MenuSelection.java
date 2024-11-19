@@ -6,8 +6,9 @@ public class MenuSelection {
     public static boolean exit = false;
     public static ArrayList<Car> carDetailList = new ArrayList<>(); //create a list to store each instance of the class Car
     private final int maxCars = 10; //maximum amount of cars which can be in stock, not going to change throughout programme
-    private final String[] currentField = {"reg", "make", "model", "mileage", "age", "colour", "feature"};
+    private final String[] currentField = {"registration plate", "make", "model", "mileage", "age", "colour", "feature"};
     private String field;
+    private boolean anotherCar = true;
 
     public Scanner scanner = new Scanner(System.in);
     public static String userInput;
@@ -56,10 +57,40 @@ public class MenuSelection {
     private void menuSelection2(){
         System.out.println("You have chosen option 2: add a new car to the Vroom Vroom Vault.");
 
-        for(String f : currentField){
-            field = f;
-            addField();
+        System.out.println("Vroom Vroom Vault currently has " + Car.getCarCount() + " cars in stock. We have space for " + (maxCars - Car.getCarCount()) + "more cars.");
+        
+        if (Car.getCarCount() >= maxCars)
+        {
+            System.out.println("Sorry, we are unable to add a car at this time.");
+            anotherCar = false;
         }
+
+        while (anotherCar && Car.getCarCount() < maxCars)
+        {
+            carDetailList.add(new Car());
+            for (String f : currentField){
+                field = f;
+
+                if(field.equals("registration plate"))
+                {}
+                else if(field.equals("feature"))
+                {}
+                else{
+                    System.out.println("What is the " + field + " of the " + Car.getCarReg() + "?");
+                }
+            }
+        }
+
+
+
+
+
+        
+
+        // for(String f : currentField){
+        //     field = f;
+        //     addField();
+        // }
 
         System.out.println("Press enter to continue");
         scanner.nextLine();
@@ -82,7 +113,7 @@ public class MenuSelection {
             case "reg":
                 System.out.println("What is the registration plate of the car?");
                 userInput = scanner.nextLine();
-                
+                Car.setCarReg(userInput);
 
             case "make":
 
