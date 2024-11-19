@@ -3,12 +3,16 @@ import java.util.Scanner;
 
 public class MenuSelection {
 
+    // Car car = new Car();
+
     public static boolean exit = false;
     public static ArrayList<Car> carDetailList = new ArrayList<>(); //create a list to store each instance of the class Car
     private final int maxCars = 10; //maximum amount of cars which can be in stock, not going to change throughout programme
     private final String[] currentField = {"registration plate", "make", "model", "mileage", "age", "colour", "feature"};
-    private String field;
+    //private String field;
+
     private boolean anotherCar = true;
+
 
     public Scanner scanner = new Scanner(System.in);
     public static String userInput;
@@ -55,6 +59,9 @@ public class MenuSelection {
         scanner.nextLine();
     }//menuSeleciton1()
     private void menuSelection2(){
+
+        AddField addField = new AddField();
+
         System.out.println("You have chosen option 2: add a new car to the Vroom Vroom Vault.");
 
         System.out.println("Vroom Vroom Vault currently has " + Car.getCarCount() + " cars in stock. We have space for " + (maxCars - Car.getCarCount()) + "more cars.");
@@ -67,18 +74,18 @@ public class MenuSelection {
 
         while (anotherCar && Car.getCarCount() < maxCars)
         {
-            carDetailList.add(new Car());
-            for (String f : currentField){
-                field = f;
-
-                if(field.equals("registration plate"))
-                {}
-                else if(field.equals("feature"))
-                {}
-                else{
-                    System.out.println("What is the " + field + " of the " + Car.getCarReg() + "?");
-                }
+            // carDetailList.add(new Car());
+            addField.addCarReg();
+            if (addField.duplicateCar == true)
+            {
+                addField.addCarMake();
+                addField.addCarModel();
+                addField.addCarMileage();
+                addField.addCarAge();
+                addField.addCarColour();
+                addField.addCarFeatures();
             }
+            
         }
 
 
@@ -108,25 +115,25 @@ public class MenuSelection {
 
     }//
     
-    private void addField(){
-        switch (field){
-            case "reg":
-                System.out.println("What is the registration plate of the car?");
-                userInput = scanner.nextLine();
-                Car.setCarReg(userInput);
+    // private void addField(){
+    //     switch (field){
+    //         case "reg":
+    //             System.out.println("What is the registration plate of the car?");
+    //             userInput = scanner.nextLine();
+    //             Car.setCarReg(userInput);
 
-            case "make":
+    //         case "make":
 
-            case "model":
+    //         case "model":
 
-            case "mileage":
+    //         case "mileage":
 
-            case "age":
+    //         case "age":
 
-            case "colour":
+    //         case "colour":
 
-            case "feature":
+    //         case "feature":
 
-        }
-    }
+    //     }
+    // }
 }

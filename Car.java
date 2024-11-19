@@ -23,13 +23,13 @@ public class Car{
 
     //constructor
     public Car(String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){
-        CarReg = carReg.toUpperCase();
-        CarMake = carMake.toLowerCase();
-        CarModel = carModel.toLowerCase();
-        CarMileage = carMileage;
-        CarAge = carAge;
-        CarColour = carColour.toLowerCase();
-        CarFeatures = carFeatures.toLowerCase();
+        this.CarReg = carReg.toUpperCase();
+        this.CarMake = carMake.toLowerCase();
+        this.CarModel = carModel.toLowerCase();
+        this.CarMileage = carMileage;
+        this.CarAge = carAge;
+        this.CarColour = carColour.toLowerCase();
+        this.CarFeatures = carFeatures.toLowerCase();
 
         carCount++;
     }
@@ -50,7 +50,7 @@ public class Car{
     }
 
     public String getCarReg(){ //cannot be static because for the instances not the whole class
-        return this.CarReg;
+        return CarReg;
     }
 
     public void setCarReg(String reg){
