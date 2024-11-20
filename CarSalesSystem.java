@@ -8,7 +8,7 @@ public class CarSalesSystem{
 
             System.out.println("Welcome to the Vroom Vroom Vault!");
             
-            TryParseInt.tryParseInt("2");
+            //TryParseInt.tryParseInt("2");
 
             do
             {

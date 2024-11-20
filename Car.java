@@ -9,17 +9,6 @@ public class Car{
     private String CarColour;
     private String CarFeatures;
     private static int carCount;
-    
-    
-    // private enum currentField{
-    //     reg,
-    //     make,
-    //     model,
-    //     mileage,
-    //     age,
-    //     colour,
-    //     features
-    // }
 
     //constructor
     public Car(String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){

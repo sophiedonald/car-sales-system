@@ -4,11 +4,10 @@ import java.util.Scanner;
 public class MenuSelection {
 
     // Car car = new Car();
-
     public static boolean exit = false;
     public static ArrayList<Car> carDetailList = new ArrayList<>(); //create a list to store each instance of the class Car
     private final int maxCars = 10; //maximum amount of cars which can be in stock, not going to change throughout programme
-    private final String[] currentField = {"registration plate", "make", "model", "mileage", "age", "colour", "feature"};
+    //private final String[] currentField = {"registration plate", "make", "model", "mileage", "age", "colour", "feature"};
     //private String field;
 
     private boolean anotherCar = true;
@@ -49,10 +48,10 @@ public class MenuSelection {
     private void menuSelection1(){
         System.out.println("You have chosen option 1: display all current car information. We currently have " + Car.getCarCount() + " cars in stock.");
         for(Car car : carDetailList){
-            if (!(car.toString().equals("")))
-            {
+            //if (!(car.toString().equals("")))
+            //{
                 System.out.println(car.toString());
-            }
+            //}
             System.out.println();
         }
         System.out.println("Press enter to continue");
@@ -72,33 +71,32 @@ public class MenuSelection {
             anotherCar = false;
         }
 
-        while (anotherCar && Car.getCarCount() < maxCars)
+        if (anotherCar && Car.getCarCount() < maxCars)
         {
             // carDetailList.add(new Car());
             addField.addCarReg();
-            if (addField.duplicateCar == true)
+            if (addField.duplicateCar == false)
             {
+                System.out.println("hi");
                 addField.addCarMake();
                 addField.addCarModel();
                 addField.addCarMileage();
                 addField.addCarAge();
                 addField.addCarColour();
                 addField.addCarFeatures();
+
+                System.out.println("Press enter to view a summary of " + addField.tempCarDetails[0]);
+                scanner.nextLine();
+
+                System.out.println("Registration:\t" + addField.tempCarDetails[0] + "\nMake:\t\t" + addField.tempCarDetails[1] + "\nModel:\t\t" + addField.tempCarDetails[2] + "\nMileage:\t" + addField.tempCarDetails[3] + "\nAge:\t\t" + addField.tempCarDetails[4] + "\nColour:\t\t" + addField.tempCarDetails[5] + "\nFeatures:\t" + addField.tempCarDetails[6]);
+                System.out.println("\nWould you like to add " + addField.tempCarDetails[0] + " to the Vroom Vroom Vault? y/n");
+                userInput = scanner.nextLine();
+                if (userInput.startsWith("y"))
+                {
+                    carDetailList.add(new Car(addField.tempCarDetails[0], addField.tempCarDetails[1], addField.tempCarDetails[2], TryParseInt.tryParseInt(addField.tempCarDetails[3]), TryParseInt.tryParseInt(addField.tempCarDetails[4]), addField.tempCarDetails[5], addField.tempCarDetails[6]));
+                }
             }
-            
         }
-
-
-
-
-
-        
-
-        // for(String f : currentField){
-        //     field = f;
-        //     addField();
-        // }
-
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//menuSelection2()
