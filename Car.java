@@ -37,6 +37,11 @@ public class Car{
     public static int getCarCount() { //can be static because is in the class not the instances/objects
         return carCount;
     }
+    public static void setCarCount(int incrementAmount)
+    {
+        carCount += incrementAmount;
+    }
+
 
     public String getCarReg(){ //cannot be static because for the instances not the whole class
         return CarReg;
