@@ -1,3 +1,5 @@
+
+
 public class Car{
 
     //create all fields for the car properties
@@ -10,15 +12,35 @@ public class Car{
     private String CarFeatures;
     private static int carCount;
 
+    public enum carProperties
+    {
+        getCarReg(),
+        getCarMake(),
+        getCarModel(),
+        getCarMileage(),
+        getCarAge(),
+        getCarColour(),
+        getCarFeatures()
+    }
+
+
+
     //constructor used to assign each property of the object
     public Car(String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){
         this.CarReg = carReg.toUpperCase();
-        this.CarMake = carMake.toLowerCase();
-        this.CarModel = carModel.toLowerCase();
+        this.CarMake = carMake.toUpperCase();
+        this.CarModel = carModel.toUpperCase();
         this.CarMileage = carMileage;
-        this.CarAge = carAge;
-        this.CarColour = carColour.toLowerCase();
-        this.CarFeatures = carFeatures.toLowerCase();
+        if(carAge > 1900)
+        {
+            this.CarAge = (2024 - carAge);
+        }
+        else
+        {
+            this.CarAge = carAge;
+        }
+        this.CarColour = carColour.toUpperCase();
+        this.CarFeatures = carFeatures.toUpperCase();
 
         carCount++;
     }
@@ -80,6 +102,12 @@ public class Car{
         return this.CarAge;
     }
     public void setCarAge(int age){
+        if (age > 1900)
+        {
+            System.out.println("It looks like you've entered the year of registration rather than the age of the car. Don't worry, we've taken the age of the car to be " + (2024 - TryParseInt.tryParseInt(MenuSelection.userInput)));
+
+            age = 2024 - age;
+        }
         this.CarAge = age;
     }
 
@@ -100,8 +128,42 @@ public class Car{
     }
 
     //override method to print all information formatted
-    public String toString() { //prints all information inline
-        return "Registration:\t" + CarReg + "\nMake:\t\t" + CarMake + "\nModel:\t\t" + CarModel + "\nMileage:\t" + CarMileage + "\nAge:\t\t" + CarAge + "\nColour:\t\t" + CarColour + "\nFeatures:\t" + CarFeatures;
+    public String toString(Car car) { //prints all information inline
+        String carSummary;
+
+        if (car.CarMileage == -1 && car.CarAge == -1)
+        {
+            carSummary =  "Registration:\t" + car.CarReg + "\nMake:\t\t" + car.CarMake + "\nModel:\t\t" + car.CarModel + "\nMileage:\nAge:\nColour:\t\t" + car.CarColour + "\nFeatures:\t" + car.CarFeatures;
+        }
+        else if (car.CarMileage == -1 && car.CarAge != -1)
+        {
+            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t" + car.CarMake + "\nModel:\t\t" + car.CarModel + "\nMileage:\nAge:\t\t" + car.CarAge + "\nColour:\t\t" + car.CarColour + "\nFeatures:\t" + car.CarFeatures;
+        }
+        else if(car.CarMileage != -1 && car.CarAge == -1)
+        {
+            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t" + car.CarMake + "\nModel:\t\t" + car.CarModel + "\nMileage:\t" + car.CarMileage + "\nAge:\nColour:\t\t" + car.CarColour + "\nFeatures:\t" + car.CarFeatures;
+        }
+        else
+        {
+            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t" + car.CarMake + "\nModel:\t\t" + car.CarModel + "\nMileage:\t" + car.CarMileage + "\nAge:\t\t" + car.CarAge + "\nColour:\t\t" + car.CarColour + "\nFeatures:\t" + car.CarFeatures;
+        }
+        return carSummary;
+    }
+
+    public boolean contains(Car car, String searchTerm){
+        boolean bool = false;
+        for (Object property : carProperties.values()) {
+            if (property.toString().contains(searchTerm))
+            {
+                bool = true;
+                break;
+            }
+            else
+            {
+                bool = false;
+            }
+        }
+        return bool;      
     }
 
 }

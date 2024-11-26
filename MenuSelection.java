@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class MenuSelection {
 
-    // Car car = new Car();
+    Car car = new Car();
     public static boolean exit = false;
     public static ArrayList<Car> carDetailList = new ArrayList<>(); //create a list to store each instance of the class Car
     private final int maxCars = 10; //maximum amount of cars which can be in stock, not going to change throughout programme
@@ -49,6 +49,7 @@ public class MenuSelection {
                 break;
             case "6":
                 menuSelection6();
+                break;
             case "exit":
                 System.out.println("Goodbye");
                 exit = true;
@@ -66,13 +67,14 @@ public class MenuSelection {
         for(Car car : carDetailList){
             //if (!(car.toString().equals("")))
             //{
-                System.out.println(car.toString());
+                System.out.println(car.toString(car));
             //}
             System.out.println();
         }
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//menuSeleciton1()
+
     private void menuSelection2(){
 
         AddField addField = new AddField();
@@ -93,7 +95,6 @@ public class MenuSelection {
             addField.addCarReg();
             if (addField.duplicateCar == false)
             {
-                System.out.println("hi");
                 addField.addCarMake();
                 addField.addCarModel();
                 addField.addCarMileage();
@@ -101,26 +102,32 @@ public class MenuSelection {
                 addField.addCarColour();
                 addField.addCarFeatures();
 
+                carDetailList.add(new Car(addField.tempCarDetails[0], addField.tempCarDetails[1], addField.tempCarDetails[2], TryParseInt.tryParseInt(addField.tempCarDetails[3]), TryParseInt.tryParseInt(addField.tempCarDetails[4]), addField.tempCarDetails[5], addField.tempCarDetails[6]));
+                
+
                 System.out.println("Press enter to view a summary of " + addField.tempCarDetails[0]);
                 scanner.nextLine();
 
-                System.out.println("Registration:\t" + addField.tempCarDetails[0] + "\nMake:\t\t" + addField.tempCarDetails[1] + "\nModel:\t\t" + addField.tempCarDetails[2] + "\nMileage:\t" + addField.tempCarDetails[3] + "\nAge:\t\t" + addField.tempCarDetails[4] + "\nColour:\t\t" + addField.tempCarDetails[5] + "\nFeatures:\t" + addField.tempCarDetails[6]);
+                System.out.println(car.toString(carDetailList.get(carDetailList.size() - 1 )));
+
+                //System.out.println("Registration:\t" + addField.tempCarDetails[0] + "\nMake:\t\t" + addField.tempCarDetails[1] + "\nModel:\t\t" + addField.tempCarDetails[2] + "\nMileage:\t" + addField.tempCarDetails[3] + "\nAge:\t\t" + addField.tempCarDetails[4] + "\nColour:\t\t" + addField.tempCarDetails[5] + "\nFeatures:\t" + addField.tempCarDetails[6]);
                 
                 do{
                     System.out.println("\nWould you like to add " + addField.tempCarDetails[0] + " to the Vroom Vroom Vault? y/n");
                     userInput = scanner.nextLine();
                     if (userInput.startsWith("y"))
                     {
-                        carDetailList.add(new Car(addField.tempCarDetails[0], addField.tempCarDetails[1], addField.tempCarDetails[2], TryParseInt.tryParseInt(addField.tempCarDetails[3]), TryParseInt.tryParseInt(addField.tempCarDetails[4]), addField.tempCarDetails[5], addField.tempCarDetails[6]));
+                        // carDetailList.add(new Car(addField.tempCarDetails[0], addField.tempCarDetails[1], addField.tempCarDetails[2], TryParseInt.tryParseInt(addField.tempCarDetails[3]), TryParseInt.tryParseInt(addField.tempCarDetails[4]), addField.tempCarDetails[5], addField.tempCarDetails[6]));
                         System.out.println(addField.tempCarDetails[0] + " has successfully been added to the Vroom Vroom Vault");
-                        addField.tempCarDetails = null;
                     }
                     else if (userInput.startsWith("n"))
                     {
-                        addField.tempCarDetails = null;
+                        System.out.println(addField.tempCarDetails[0] + "will not be added and has been removed from the system.");
+                        carDetailList.remove(carDetailList.size() - 1);        
                     }
                 }
                 while (!(userInput.startsWith("y") || userInput.startsWith("n")));
+                addField.tempCarDetails = null;
                 
             }
         }
@@ -139,7 +146,7 @@ public class MenuSelection {
                 System.out.println(c.getCarReg());
                 
             }
-            System.out.println("Which car would you like to delete? (1 - " + carDetailList.size() + ")");
+            System.out.println("Which car would you like to delete? (1 - " + carDetailList.size() + "). Press any other key to cancel");
             userInput = scanner.nextLine();
 
             try {
@@ -163,11 +170,17 @@ public class MenuSelection {
     }//menuSelection3
 
     private void menuSelection4(){ //Check
+        AddField addField = new AddField();
         System.out.println("You have chosen option 4: check all current car fields are complete");
 
+        for (Car car : carDetailList)
+        {
+            addField.addCarMileage(car);
+            addField.addCarAge(car);
+        }
         
-
-        System.out.println("COMING SOON");
+        System.out.println("All checks complete");
+        //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//menuSelection4
@@ -199,14 +212,14 @@ public class MenuSelection {
             userInput = scanner.nextLine().trim();
             if (!userInput.equals(""))
             {
-                editCar.setCarMake(userInput.toLowerCase().replace(" ", ""));
+                editCar.setCarMake(userInput.toUpperCase().replace(" ", ""));
             }
 
             System.out.println("Please enter the new model of " + editCar.getCarReg() +". If you would not like to edit the model, press enter.");
             userInput = scanner.nextLine().trim();
             if (!userInput.equals(""))
             {
-                editCar.setCarModel(userInput.toLowerCase().replace(" ", ""));
+                editCar.setCarModel(userInput.toUpperCase().replace(" ", ""));
             }
 
             System.out.println("Please enter the new mileage of " + editCar.getCarReg() +". If you would not like to edit the mileage, press enter.");
@@ -227,7 +240,7 @@ public class MenuSelection {
             userInput = scanner.nextLine().trim();
             if (!userInput.equals(""))
             {
-                editCar.setCarFeatures(userInput.toLowerCase().replace(" ", ""));
+                editCar.setCarFeatures(userInput.toUpperCase().replace(" ", ""));
             }
 
 
@@ -243,6 +256,22 @@ public class MenuSelection {
 
     private void menuSelection6(){ //Search
         System.out.println("You have chosen option 6: search through Vroom Vroom Vault");
+
+        System.out.println("Please enter search term:");
+        userInput = scanner.nextLine().toUpperCase();
+
+        for (Car car : carDetailList)
+        {
+            if(car.contains(car, userInput))
+            {
+                System.out.println(car.toString(car));
+            }
+            else{
+                System.out.println(car.getCarReg() + " does not contain");
+            }
+        }
+
+
         System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();

@@ -16,7 +16,7 @@ public class AddField {
     {
         //Car car = new Car();
         do { 
-            System.out.println("What is the registatration plate of the car?"); //required
+            System.out.println("What is the registatration plate of the car you would like to add? *"); //required
             MenuSelection.userInput = scanner.nextLine().toUpperCase().replace(" ","");
 
             if(MenuSelection.userInput.trim().length() > 7)
@@ -29,7 +29,6 @@ public class AddField {
                 //for (Car c : MenuSelection.carDetailList)
                 for (int i = 0 ; i < MenuSelection.carDetailList.size() ; i++) //using a for each gets a concurrentmodificationexception
                 {
-                    System.out.println(MenuSelection.carDetailList.size());
                     Car c = MenuSelection.carDetailList.get(i);
                     //String currentReg = c.getCarReg();
                     if (MenuSelection.userInput.equals(c.getCarReg()))
@@ -55,7 +54,7 @@ public class AddField {
                 {
                     System.out.println("Do you want to add another car? y/n");
                     MenuSelection.userInput = scanner.nextLine();
-                    if(MenuSelection.userInput.toLowerCase().startsWith("y"))
+                    if(MenuSelection.userInput.toUpperCase().startsWith("y"))
                     {
                         validInput = false;
                     }
@@ -76,8 +75,8 @@ public class AddField {
         //Car car = new Car();
         do
         {
-            System.out.println("What is the make of " + tempCarDetails[0] + "?"); //required
-            MenuSelection.userInput = scanner.nextLine().toLowerCase();
+            System.out.println("What is the make of " + tempCarDetails[0] + "? *"); //required
+            MenuSelection.userInput = scanner.nextLine().toUpperCase();
             if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
             {
                 tempCarDetails[1] = MenuSelection.userInput.trim();
@@ -95,8 +94,8 @@ public class AddField {
     {
         do
         {
-            System.out.println("What is the model of " + tempCarDetails[0] + "?"); //required
-            MenuSelection.userInput = scanner.nextLine().toLowerCase();
+            System.out.println("What is the model of " + tempCarDetails[0] + "? *"); //required
+            MenuSelection.userInput = scanner.nextLine().toUpperCase();
             if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
             {
                 tempCarDetails[2] = MenuSelection.userInput;
@@ -114,10 +113,14 @@ public class AddField {
     {
         do
         {
-            System.out.println("What is the mileage of " + tempCarDetails[0] + "? (enter idk if not known)"); //not required
-            MenuSelection.userInput = scanner.nextLine().toLowerCase();
+            System.out.println("What is the mileage of " + tempCarDetails[0] + "?"); //not required
+            MenuSelection.userInput = scanner.nextLine().toUpperCase();
             if (MenuSelection.userInput != null)
             {
+                if(TryParseInt.tryParseInt(MenuSelection.userInput) < 0) //includes -1 which is returned upon parse failure
+                {
+                    System.out.println("Invalid entry. Please make use of the (4: Check all fields are complete) or (5: Edit fields) options to amend this later on.");
+                }
                 tempCarDetails[3] = MenuSelection.userInput;
                 validInput = true;
             }
@@ -132,15 +135,23 @@ public class AddField {
     {
         do
         {
-            System.out.println("What is the age of " + tempCarDetails[0] + "? (enter idk if not known)"); //not required
-            MenuSelection.userInput = scanner.nextLine().toLowerCase();
+            System.out.println("What is the age of " + tempCarDetails[0] + "?"); //not required
+            MenuSelection.userInput = scanner.nextLine();
             if (MenuSelection.userInput != null)
             {
-                if (TryParseInt.tryParseInt(MenuSelection.userInput) > 1900)
+                if(TryParseInt.tryParseInt(MenuSelection.userInput) < 0) //includes -1 which is returned upon parse failure
+                {
+                    System.out.println("Invalid entry. Please make use of the (4: Check all fields are complete) or (5: Edit fields) options to amend this later on.");
+                }
+                else if (TryParseInt.tryParseInt(MenuSelection.userInput) > 1900)
                 {
                     System.out.println("It looks like you've entered the year of registration rather than the age of the car. Don't worry, we've taken the age of the car to be " + (2024 - TryParseInt.tryParseInt(MenuSelection.userInput)));
+                    tempCarDetails[4] = "" + (2024 - TryParseInt.tryParseInt(MenuSelection.userInput));
                 }
-                tempCarDetails[4] = MenuSelection.userInput;
+                else
+                {
+                    tempCarDetails[4] = MenuSelection.userInput;
+                }
                 validInput = true;
             }
             else
@@ -150,13 +161,38 @@ public class AddField {
         }
         while (validInput == false);
     }
+
+    public void addCarAge(Car c)
+    {
+        while (c.getCarAge() == -1)
+        {
+            System.out.println("You have not yet entered a valid age for " + c.getCarReg() + ". Please do this now:"); //not required
+            MenuSelection.userInput = scanner.nextLine();
+            c.setCarAge(TryParseInt.tryParseInt(MenuSelection.userInput));
+            
+                
+        }
+    }
+
+    public void addCarMileage(Car c)
+    {
+        while ( c.getCarMileage() == -1)
+        {
+            System.out.println("You have not yet entered a valid mileage for " + c.getCarReg() + ". Please do this now:");
+            MenuSelection.userInput = scanner.nextLine();
+            if(TryParseInt.tryParseInt(MenuSelection.userInput) >= 0)
+            {
+                c.setCarMileage(TryParseInt.tryParseInt(MenuSelection.userInput));
+            }
+        }
+    }
     
     public void addCarColour()
     {
         do
         {
-            System.out.println("What is the colour of " + tempCarDetails[0] + "? (enter idk if not known)"); //not required
-            MenuSelection.userInput = scanner.nextLine().toLowerCase();
+            System.out.println("What is the colour of " + tempCarDetails[0] + "?"); //not required
+            MenuSelection.userInput = scanner.nextLine().toUpperCase();
             if (MenuSelection.userInput != null)
             {
                 tempCarDetails[5] = MenuSelection.userInput;
@@ -175,7 +211,7 @@ public class AddField {
         do
         {
             System.out.println("What are the features of " + tempCarDetails[0] + "?"); //not required
-            MenuSelection.userInput = scanner.nextLine().toLowerCase();
+            MenuSelection.userInput = scanner.nextLine().toUpperCase();
             if (MenuSelection.userInput != null)
             {
                 tempCarDetails[6] = MenuSelection.userInput;

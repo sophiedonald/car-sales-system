@@ -6,8 +6,7 @@ public class CarSalesSystem{
             MenuSelection.carDetailList.add(new Car("ML12GZO", "Vauxhall", "Corsa", 55000, 12, "Red", "radio"));
 
 
-            LoadingAnimation();
-
+            System.out.println("_________________________________");
             System.out.println("Welcome to the Vroom Vroom Vault!");
             
             //TryParseInt.tryParseInt("2");
@@ -18,23 +17,5 @@ public class CarSalesSystem{
                 menuSelection.mainMenu();
             } 
             while (MenuSelection.exit == false);
-        }
-
-        public static void LoadingAnimation(){
-            System.out.println("  ______");
-            System.out.println(" /|_|_| \\`__");
-            System.out.println("(   _     _   \\");
-            System.out.print("=`-(_)---(_)---'");
-
-            for (int i = 0; i < 35 ; i++)
-            {
-                try {
-                    
-                    System.out.print("_");
-                    Thread.sleep(5);
-                } catch (InterruptedException ex) {
-                }
-            }
-            System.out.println();
         }
 }
