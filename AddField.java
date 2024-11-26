@@ -16,7 +16,7 @@ public class AddField {
     {
         //Car car = new Car();
         do { 
-            System.out.println("What is the registatration plate of the car?");
+            System.out.println("What is the registatration plate of the car?"); //required
             MenuSelection.userInput = scanner.nextLine().toUpperCase().replace(" ","");
 
             if(MenuSelection.userInput.trim().length() > 7)
@@ -24,7 +24,7 @@ public class AddField {
                 System.out.println("A registration plate cannot be longer than 6 characters. Please make sure you enter the correct registration number.");
                 validInput = false;
             }
-            else
+            else if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
             {
                 //for (Car c : MenuSelection.carDetailList)
                 for (int i = 0 ; i < MenuSelection.carDetailList.size() ; i++) //using a for each gets a concurrentmodificationexception
@@ -64,6 +64,10 @@ public class AddField {
                     }
                 }
             }
+            else
+            {
+                validInput = false;
+            }
         } while (validInput == false);
     }
 
@@ -72,11 +76,11 @@ public class AddField {
         //Car car = new Car();
         do
         {
-            System.out.println("What is the make of " + tempCarDetails[0] + "?");
+            System.out.println("What is the make of " + tempCarDetails[0] + "?"); //required
             MenuSelection.userInput = scanner.nextLine().toLowerCase();
-            if (MenuSelection.userInput != null)
+            if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
             {
-                tempCarDetails[1] = MenuSelection.userInput;
+                tempCarDetails[1] = MenuSelection.userInput.trim();
                 validInput = true;
             }
             else
@@ -91,9 +95,9 @@ public class AddField {
     {
         do
         {
-            System.out.println("What is the model of " + tempCarDetails[0] + "?");
+            System.out.println("What is the model of " + tempCarDetails[0] + "?"); //required
             MenuSelection.userInput = scanner.nextLine().toLowerCase();
-            if (MenuSelection.userInput != null)
+            if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
             {
                 tempCarDetails[2] = MenuSelection.userInput;
                 validInput = true;
@@ -110,7 +114,7 @@ public class AddField {
     {
         do
         {
-            System.out.println("What is the mileage of " + tempCarDetails[0] + "? (enter idk if not known)");
+            System.out.println("What is the mileage of " + tempCarDetails[0] + "? (enter idk if not known)"); //not required
             MenuSelection.userInput = scanner.nextLine().toLowerCase();
             if (MenuSelection.userInput != null)
             {
@@ -128,7 +132,7 @@ public class AddField {
     {
         do
         {
-            System.out.println("What is the age of " + tempCarDetails[0] + "? (enter idk if not known)");
+            System.out.println("What is the age of " + tempCarDetails[0] + "? (enter idk if not known)"); //not required
             MenuSelection.userInput = scanner.nextLine().toLowerCase();
             if (MenuSelection.userInput != null)
             {
@@ -151,7 +155,7 @@ public class AddField {
     {
         do
         {
-            System.out.println("What is the colour of " + tempCarDetails[0] + "? (enter idk if not known)");
+            System.out.println("What is the colour of " + tempCarDetails[0] + "? (enter idk if not known)"); //not required
             MenuSelection.userInput = scanner.nextLine().toLowerCase();
             if (MenuSelection.userInput != null)
             {
@@ -170,7 +174,7 @@ public class AddField {
     {
         do
         {
-            System.out.println("What are the features of " + tempCarDetails[0] + "? (enter idk if not known)");
+            System.out.println("What are the features of " + tempCarDetails[0] + "?"); //not required
             MenuSelection.userInput = scanner.nextLine().toLowerCase();
             if (MenuSelection.userInput != null)
             {

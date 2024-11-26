@@ -131,7 +131,7 @@ public class MenuSelection {
     private void menuSelection3(){ //Delete
         System.out.println("You have chosen option 3: delete a car from the Vroom Vroom Vault.");
 
-        if (carDetailList.size() > 0)
+        if (!carDetailList.isEmpty())
         {
             System.out.println("Vroom Vroom Vault currently has " + Car.getCarCount() + " cars in stock:");
             for (Car c : carDetailList){
@@ -152,10 +152,10 @@ public class MenuSelection {
                 System.out.println("Sorry, this car does not exist.");
             }
         }
-        else{
+        else
+        {
             System.out.println("Vroom Vroom Vault currently has 0 cars in stock. You cannot delete a car at this time.");
         }
-
 
         //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
@@ -163,18 +163,86 @@ public class MenuSelection {
     }//menuSelection3
 
     private void menuSelection4(){ //Check
+        System.out.println("You have chosen option 4: check all current car fields are complete");
+
+        
+
         System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//menuSelection4
 
     private void menuSelection5(){ //Edit
-        System.out.println("COMING SOON");
+        System.out.println("You have chosen option 5: edit the details of a car");
+
+        System.out.println("Vroom Vroom Vault currently has " + Car.getCarCount() + " cars in stock:");
+        for (Car c : carDetailList){
+            System.out.print((carDetailList.indexOf(c) + 1) + ": ");
+            System.out.println(c.getCarReg());
+        }
+        System.out.println("Which car would you like to edit? (1 - " + carDetailList.size() + ")");
+        userInput = scanner.nextLine();
+        
+        try {
+            Car editCar = carDetailList.get(TryParseInt.tryParseInt(userInput) - 1);
+
+            System.out.println("Edit mode: " + editCar.getCarReg());
+
+            System.out.println("Please enter the new registration plate. If you would not like to edit the registration plate, press enter.");
+            userInput = scanner.nextLine().trim();
+            if (!userInput.equals(""))
+            {
+                editCar.setCarReg(userInput.toUpperCase().replace(" ", ""));
+            }
+
+            System.out.println("Please enter the new make of " + editCar.getCarReg() +". If you would not like to edit the make, press enter.");
+            userInput = scanner.nextLine().trim();
+            if (!userInput.equals(""))
+            {
+                editCar.setCarMake(userInput.toLowerCase().replace(" ", ""));
+            }
+
+            System.out.println("Please enter the new model of " + editCar.getCarReg() +". If you would not like to edit the model, press enter.");
+            userInput = scanner.nextLine().trim();
+            if (!userInput.equals(""))
+            {
+                editCar.setCarModel(userInput.toLowerCase().replace(" ", ""));
+            }
+
+            System.out.println("Please enter the new mileage of " + editCar.getCarReg() +". If you would not like to edit the mileage, press enter.");
+            userInput = scanner.nextLine().trim();
+            if (!userInput.equals(""))
+            {
+                editCar.setCarMileage(TryParseInt.tryParseInt(userInput));
+            }
+
+            System.out.println("Please enter the new age of " + editCar.getCarReg() +". If you would not like to edit the age, press enter.");
+            userInput = scanner.nextLine().trim();
+            if (!userInput.equals(""))
+            {
+                editCar.setCarAge(TryParseInt.tryParseInt(userInput));
+            }
+
+            System.out.println("Please enter the new features of " + editCar.getCarReg() +". If you would not like to edit the features, press enter.");
+            userInput = scanner.nextLine().trim();
+            if (!userInput.equals(""))
+            {
+                editCar.setCarFeatures(userInput.toLowerCase().replace(" ", ""));
+            }
+
+
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Sorry, this car does not exist.");
+            
+        }
+
+        //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//
 
     private void menuSelection6(){ //Search
+        System.out.println("You have chosen option 6: search through Vroom Vroom Vault");
         System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
