@@ -54,9 +54,10 @@ public class AddField {
                 {
                     System.out.println("Do you want to add another car? y/n");
                     MenuSelection.userInput = scanner.nextLine();
-                    if(MenuSelection.userInput.toUpperCase().startsWith("y"))
+                    if(MenuSelection.userInput.toUpperCase().startsWith("Y"))
                     {
                         validInput = false;
+                        
                     }
                     else{
                         validInput = true;
@@ -117,7 +118,13 @@ public class AddField {
             MenuSelection.userInput = scanner.nextLine().toUpperCase();
             if (MenuSelection.userInput != null)
             {
-                if(TryParseInt.tryParseInt(MenuSelection.userInput) < 0) //includes -1 which is returned upon parse failure
+                if(MenuSelection.userInput.equals(""))
+                {
+                    System.out.println("no entry recognised");
+                    
+                    
+                }
+                else if(TryParseInt.tryParseInt(MenuSelection.userInput) < 0 ) //includes -1 which is returned upon parse failure
                 {
                     System.out.println("Invalid entry. Please make use of the (4: Check all fields are complete) or (5: Edit fields) options to amend this later on.");
                 }
@@ -131,6 +138,17 @@ public class AddField {
         }
         while (validInput == false);
     }
+
+    public void addCarMileage(Car c) //overloaded method
+    {
+        while ( c.getCarMileage() < 0)
+        {
+            System.out.println("You have not yet entered a valid mileage for " + c.getCarReg() + ". Please do this now:");
+            MenuSelection.userInput = scanner.nextLine();
+            c.setCarMileage(TryParseInt.tryParseInt(MenuSelection.userInput));
+        }
+    }
+
     public void addCarAge()
     {
         do
@@ -162,30 +180,16 @@ public class AddField {
         while (validInput == false);
     }
 
-    public void addCarAge(Car c)
+    public void addCarAge(Car c) //overloaded method
     {
-        while (c.getCarAge() == -1)
+        while (c.getCarAge() < 0)
         {
             System.out.println("You have not yet entered a valid age for " + c.getCarReg() + ". Please do this now:"); //not required
             MenuSelection.userInput = scanner.nextLine();
             c.setCarAge(TryParseInt.tryParseInt(MenuSelection.userInput));
-            
-                
         }
     }
 
-    public void addCarMileage(Car c)
-    {
-        while ( c.getCarMileage() == -1)
-        {
-            System.out.println("You have not yet entered a valid mileage for " + c.getCarReg() + ". Please do this now:");
-            MenuSelection.userInput = scanner.nextLine();
-            if(TryParseInt.tryParseInt(MenuSelection.userInput) >= 0)
-            {
-                c.setCarMileage(TryParseInt.tryParseInt(MenuSelection.userInput));
-            }
-        }
-    }
     
     public void addCarColour()
     {

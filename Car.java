@@ -1,5 +1,3 @@
-
-
 public class Car{
 
     //create all fields for the car properties
@@ -22,8 +20,6 @@ public class Car{
         getCarColour(),
         getCarFeatures()
     }
-
-
 
     //constructor used to assign each property of the object
     public Car(String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){
@@ -152,18 +148,30 @@ public class Car{
 
     public boolean contains(Car car, String searchTerm){
         boolean bool = false;
-        for (Object property : carProperties.values()) {
-            if (property.toString().contains(searchTerm))
-            {
-                bool = true;
-                break;
-            }
-            else
-            {
-                bool = false;
-            }
+        // for (Object property : carProperties.values()) {
+        //     if (property.toString().contains(searchTerm))
+        //     {
+        //         bool = true;
+        //         break;
+        //     }
+        //     else
+        //     {
+        //         bool = false;
+        //     }
+        // }
+        
+        if (getCarReg().contains(searchTerm)
+            || getCarMake().contains(searchTerm)
+            || getCarModel().contains(searchTerm)
+            || (getCarAge() + "").contains(searchTerm)
+            || (getCarMileage() + "").contains(searchTerm)
+            || getCarColour().contains(searchTerm)
+            || getCarFeatures().contains(searchTerm))
+        {
+            bool = true;
         }
-        return bool;      
+        return bool;
+
     }
 
 }

@@ -242,8 +242,7 @@ public class MenuSelection {
             {
                 editCar.setCarFeatures(userInput.toUpperCase().replace(" ", ""));
             }
-
-
+            System.out.println("Edits complete");
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Sorry, this car does not exist.");
             
@@ -255,6 +254,7 @@ public class MenuSelection {
     }//
 
     private void menuSelection6(){ //Search
+        int numberOfMatches = 0;
         System.out.println("You have chosen option 6: search through Vroom Vroom Vault");
 
         System.out.println("Please enter search term:");
@@ -264,15 +264,19 @@ public class MenuSelection {
         {
             if(car.contains(car, userInput))
             {
+                System.out.println("---------------------------");
                 System.out.println(car.toString(car));
+                System.out.println("---------------------------");
+                numberOfMatches++;
             }
             else{
-                System.out.println(car.getCarReg() + " does not contain");
+                System.out.println(car.getCarReg() + " does not contain " + userInput);
             }
         }
+        System.out.println(numberOfMatches + " match found for search term: " + userInput);
 
 
-        System.out.println("COMING SOON");
+        //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }
