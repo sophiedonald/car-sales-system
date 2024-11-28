@@ -10,17 +10,6 @@ public class Car{
     private String CarFeatures;
     private static int carCount;
 
-    public enum carProperties
-    {
-        getCarReg(),
-        getCarMake(),
-        getCarModel(),
-        getCarMileage(),
-        getCarAge(),
-        getCarColour(),
-        getCarFeatures()
-    }
-
     //constructor used to assign each property of the object
     public Car(String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){
         this.CarReg = carReg.toUpperCase();

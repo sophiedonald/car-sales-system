@@ -54,14 +54,7 @@ public class AddField {
                 {
                     System.out.println("Do you want to add another car? y/n");
                     MenuSelection.userInput = scanner.nextLine();
-                    if(MenuSelection.userInput.toUpperCase().startsWith("Y"))
-                    {
-                        validInput = false;
-                        
-                    }
-                    else{
-                        validInput = true;
-                    }
+                    validInput = !MenuSelection.userInput.toUpperCase().startsWith("Y"); //validInput is true if userInput does not start with Y
                 }
             }
             else

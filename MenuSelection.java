@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class MenuSelection {
 
-    Car car = new Car();
+    Car c = new Car();
     public static boolean exit = false;
     public static ArrayList<Car> carDetailList = new ArrayList<>(); //create a list to store each instance of the class Car
     private final int maxCars = 10; //maximum amount of cars which can be in stock, not going to change throughout programme
@@ -32,33 +32,21 @@ public class MenuSelection {
         
 
         switch (userInput){
-            case "1":
-                menuSelection1();
-                break;
-            case "2":
-                menuSelection2();
-                break;
-            case "3":
-                menuSelection3();
-                break;
-            case "4":
-                menuSelection4();
-                break;
-            case "5":
-                menuSelection5();
-                break;
-            case "6":
-                menuSelection6();
-                break;
-            case "exit":
+            case "1" -> menuSelection1();
+            case "2" -> menuSelection2();
+            case "3" -> menuSelection3();
+            case "4" -> menuSelection4();
+            case "5" -> menuSelection5();
+            case "6" -> menuSelection6();
+            case "exit" -> {
                 System.out.println("Goodbye");
                 exit = true;
-                break;
-            default:
+            }
+            default -> {
                 System.out.println("Invalid Option");
                 System.out.println("Press enter to continue");
                 scanner.nextLine();
-                break;
+            }
         }
     }//mainMenu()
 
@@ -108,7 +96,7 @@ public class MenuSelection {
                 System.out.println("Press enter to view a summary of " + addField.tempCarDetails[0]);
                 scanner.nextLine();
 
-                System.out.println(car.toString(carDetailList.get(carDetailList.size() - 1 )));
+                System.out.println(c.toString(carDetailList.get(carDetailList.size() - 1 )));
 
                 //System.out.println("Registration:\t" + addField.tempCarDetails[0] + "\nMake:\t\t" + addField.tempCarDetails[1] + "\nModel:\t\t" + addField.tempCarDetails[2] + "\nMileage:\t" + addField.tempCarDetails[3] + "\nAge:\t\t" + addField.tempCarDetails[4] + "\nColour:\t\t" + addField.tempCarDetails[5] + "\nFeatures:\t" + addField.tempCarDetails[6]);
                 
@@ -141,9 +129,9 @@ public class MenuSelection {
         if (!carDetailList.isEmpty())
         {
             System.out.println("Vroom Vroom Vault currently has " + Car.getCarCount() + " cars in stock:");
-            for (Car c : carDetailList){
-                System.out.print((carDetailList.indexOf(c) + 1) + ": ");
-                System.out.println(c.getCarReg());
+            for (Car car : carDetailList){
+                System.out.print((carDetailList.indexOf(car) + 1) + ": ");
+                System.out.println(car.getCarReg());
                 
             }
             System.out.println("Which car would you like to delete? (1 - " + carDetailList.size() + "). Press any other key to cancel");
@@ -189,9 +177,9 @@ public class MenuSelection {
         System.out.println("You have chosen option 5: edit the details of a car");
 
         System.out.println("Vroom Vroom Vault currently has " + Car.getCarCount() + " cars in stock:");
-        for (Car c : carDetailList){
-            System.out.print((carDetailList.indexOf(c) + 1) + ": ");
-            System.out.println(c.getCarReg());
+        for (Car car : carDetailList){
+            System.out.print((carDetailList.indexOf(car) + 1) + ": ");
+            System.out.println(car.getCarReg());
         }
         System.out.println("Which car would you like to edit? (1 - " + carDetailList.size() + ")");
         userInput = scanner.nextLine();
