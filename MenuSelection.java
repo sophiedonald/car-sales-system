@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuSelection {
@@ -9,6 +10,9 @@ public class MenuSelection {
     private final int maxCars = 10; //maximum amount of cars which can be in stock, not going to change throughout programme
     //private final String[] currentField = {"registration plate", "make", "model", "mileage", "age", "colour", "feature"};
     //private String field;
+    public static ArrayList<CanBeSold> carFinanceInformation = new ArrayList<>();
+
+    CanBeSold canBeSold = new CanBeSold();
 
     private boolean anotherCar = true;
 
@@ -26,6 +30,8 @@ public class MenuSelection {
         System.out.println("4: Check all current car fields are complete");
         System.out.println("5: Edit the details of a car");
         System.out.println("6: Display all cars with a certain make, model, mileage or colour");
+        System.out.println("7: View a car's finance information");
+        System.out.println("8: Add or edit finance information for a car");
         System.out.println("Which option would you like to choose? (type exit to exit Vroom Vroom Vault)");
         
         userInput = scanner.nextLine();
@@ -38,6 +44,8 @@ public class MenuSelection {
             case "4" -> menuSelection4();
             case "5" -> menuSelection5();
             case "6" -> menuSelection6();
+            case "7" -> menuSelection7();
+            case "8" -> menuSelection8();
             case "exit" -> {
                 System.out.println("Goodbye");
                 exit = true;
@@ -53,10 +61,9 @@ public class MenuSelection {
     private void menuSelection1(){
         System.out.println("You have chosen option 1: display all current car information. We currently have " + Car.getCarCount() + " cars in stock.");
         for(Car car : carDetailList){
-            //if (!(car.toString().equals("")))
-            //{
-                System.out.println(car.toString(car));
-            //}
+
+            System.out.println(car.toString(car));
+
             System.out.println();
         }
         System.out.println("Press enter to continue");
@@ -268,4 +275,113 @@ public class MenuSelection {
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }
+
+    private void menuSelection7(){
+
+        int addFinanceInfo;
+
+        // CanBeSold canBeSold = new CanBeSold();
+        for (Car car : carDetailList){
+            System.out.print((carDetailList.indexOf(car) + 1) + ": ");
+            System.out.println(car.getCarReg());
+            
+        }
+        System.out.println("Which car would you like to add finance information to? (1 - " + carDetailList.size() + "). Press any other key to cancel");
+        userInput = scanner.nextLine();
+
+        try {
+            addFinanceInfo = TryParseInt.tryParseInt(userInput);
+        }
+        catch (IndexOutOfBoundsException ex)
+        {
+            System.out.println("Sorry, this car does not exist.");
+            System.out.println("Press enter to continue");
+            scanner.nextLine();
+            return;
+        }
+
+        if (canBeSold.getCashPrice() != 0d)
+        {
+            System.out.println("Press enter to view all finance options for " + carDetailList.get((addFinanceInfo - 1)).getCarReg() + ".");
+            scanner.nextLine();
+            System.out.println(canBeSold.toString(carDetailList.get((addFinanceInfo - 1))));
+        }
+        else
+        {
+            System.out.println(carDetailList.get((addFinanceInfo - 1)).getCarReg() + " does not have any finance information uploaded yet. Please make use of (Option 8: Add or edit finance information for a car) to amend this.");
+        }
+
+        
+
+        //System.out.println("COMING SOON");
+        System.out.println("Press enter to continue");
+        scanner.nextLine();
+    }//menuselection7
+
+    private void menuSelection8(){
+
+        int editFinanceInfo;
+
+        CanBeSold canBeSold = new CanBeSold();
+        for (Car car : carDetailList){
+            System.out.print((carDetailList.indexOf(car) + 1) + ": ");
+            System.out.println(car.getCarReg());
+        }
+        System.out.println("Which car would you like to add finance information to? (1 - " + carDetailList.size() + "). Press any other key to cancel");
+        userInput = scanner.nextLine();
+
+        try {
+            editFinanceInfo = TryParseInt.tryParseInt(userInput) - 1;
+        }
+        catch (IndexOutOfBoundsException ex)
+        {
+            System.out.println("Sorry, this car does not exist.");
+            System.out.println("Press enter to continue");
+            scanner.nextLine();
+            return;
+        }
+
+        System.out.println("Currently in finance edit mode for " + carDetailList.get((editFinanceInfo)).getCarReg() + ".");
+        //System.out.printf("Cash price (" + carDetailList.get((editFinanceInfo)).getCarReg() + "): %.2f" + canBeSold.getCashPrice());
+        if (canBeSold.getCashPrice() != 0d)
+        {
+            System.out.printf("Cash price (%s): £%.2f%n", carDetailList.get(editFinanceInfo).getCarReg(), canBeSold.getCashPrice());
+            do
+            {
+                System.out.println("Would you like to change this? y/n");
+                userInput = scanner.nextLine().trim().toUpperCase();
+                
+            }
+            while(!(userInput.equals("Y") || userInput.equals("N")));
+            if(userInput.equals("Y"))
+            {
+                boolean valid = false;
+                double newCashPrice;
+                do
+                {
+                    try
+                    {
+                        System.out.println("Enter new cash price:");
+                        newCashPrice = scanner.nextDouble();
+                        canBeSold.setCashPrice(newCashPrice);
+                        valid = true;
+                    }
+                    catch (InputMismatchException ex)
+                    {
+                        valid = false;
+                        scanner.nextLine();
+                    }
+                }
+                while(!valid);
+            }
+        }
+        else
+        {
+            System.out.println("add finance info here");
+        }
+
+        System.out.println("COMING SOON");
+        System.out.println("Press enter to continue");
+        scanner.nextLine();
+    }//menuselection8
 }

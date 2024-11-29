@@ -1,4 +1,10 @@
-public class Car{
+interface requiredCar {
+    public void setCarReg(String reg);
+    public void setCarMake(String make);
+    public void setCarModel(String model);
+}
+
+public class Car implements requiredCar{
 
     //create all fields for the car properties
     private String CarReg; //if naming static, then all cars have the same reg etc
@@ -54,6 +60,7 @@ public class Car{
     public String getCarReg(){ //cannot be static because for the instances not the whole class
         return this.CarReg;
     }
+    @Override
     public void setCarReg(String reg){
         this.CarReg = reg;
     }
@@ -62,6 +69,7 @@ public class Car{
     public String getCarMake(){
         return this.CarMake;
     }
+    @Override
     public void setCarMake(String make){
         this.CarMake = make;
     }
@@ -70,6 +78,7 @@ public class Car{
     public String getCarModel(){
         return this.CarModel;
     }
+    @Override
     public void setCarModel(String model){
         this.CarModel = model;
     }
@@ -160,7 +169,9 @@ public class Car{
             bool = true;
         }
         return bool;
-
     }
 
+    // public void amend(Car carToBeAmended, CanBeSold canBeSold){
+
+    // }
 }

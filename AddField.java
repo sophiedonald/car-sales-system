@@ -1,6 +1,15 @@
 import java.util.Scanner;
+interface addAllFields{
+    public void addCarReg();
+    public void addCarMake();
+    public void addCarModel();
+    public void addCarMileage();
+    public void addCarAge();
+    public void addCarColour();
+    public void addCarFeatures();
+}
 
-public class AddField {
+public class AddField implements addAllFields{
 
     Scanner scanner = new Scanner(System.in);
     private boolean validInput = false;
