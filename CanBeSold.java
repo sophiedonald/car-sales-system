@@ -22,6 +22,23 @@ public class CanBeSold extends Car implements CanBeFinanced{
     {
     }
 
+    public CanBeSold(Car carCanBeSold, double cashPrice, int financeDuration){
+        //this.CarCanBeSold = car;
+        this.setCarReg(carCanBeSold.getCarReg());
+        this.setCarMake(carCanBeSold.getCarMake());
+        this.setCarModel(carCanBeSold.getCarModel());
+        this.setCarMileage(carCanBeSold.getCarMileage());
+        this.setCarAge(carCanBeSold.getCarAge());
+        this.setCarColour(carCanBeSold.getCarColour());
+        this.setCarFeatures(carCanBeSold.getCarFeatures());
+        this.CashPrice = cashPrice;
+        this.FinanceDuration = financeDuration;
+        this.FinanceDeposit = 0.3 * cashPrice;
+        this.FinanceTotalPayment = this.CashPrice + this.FinanceTotalInterest;
+        this.FinanceMonthlyPayment = this.FinanceTotalPayment / this.FinanceDuration;
+        this.FinanceTotalInterest = this.CashPrice * this.FinanceInterestPercetage;
+    }
+
     public CanBeSold(String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures, double cashPrice, int financeDuration)
     {
         super(carReg, carMake, carModel, carMileage, carAge, carColour, carFeatures);
@@ -80,7 +97,11 @@ public class CanBeSold extends Car implements CanBeFinanced{
         this.FinanceDuration = duration;
     }
 
-    // public String toString(Car basicCar){
+    //public String toString(Car basicCar){
     //     return basicCar.getCarReg() + " is £" + this.getCashPrice() + " and can be financed over " + this.getFinanceDuration() + " months for £" + this.getFinanceMonthlyPayment() + " per month with an initial deposit of " + this.getFinanceDeposit();
     // }
+
+    public String toString(){
+        return String.format("%s is £%.2f and can be financed over %d months for £%.2f per month with an initial deposit of £%.2f", this.getCarReg(), this.getCashPrice(), this.getFinanceDuration(), this.getFinanceMonthlyPayment(), this.getFinanceDeposit());
+    }
 }

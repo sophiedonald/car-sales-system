@@ -12,7 +12,7 @@ public class MenuSelection {
     //private String field;
     public static ArrayList<CanBeSold> carFinanceInformation = new ArrayList<>();
 
-    CanBeSold canBeSold = new CanBeSold();
+    //CanBeSold canBeSold = new CanBeSold();
 
     private boolean anotherCar = true;
 
@@ -268,7 +268,10 @@ public class MenuSelection {
                 System.out.println(car.getCarReg() + " does not contain " + userInput);
             }
         }
-        System.out.println(numberOfMatches + " match found for search term: " + userInput);
+        if(numberOfMatches == 1)
+            System.out.println(numberOfMatches + " match found for search term: " + userInput);
+        else
+            System.out.println(numberOfMatches + " matches found for search term: " + userInput);
 
 
         //System.out.println("COMING SOON");
@@ -276,21 +279,26 @@ public class MenuSelection {
         scanner.nextLine();
     }
 
-    private void menuSelection7(){
+    private void menuSelection7(){ //view finance information
 
-        int addFinanceInfo;
+        int viewFinanceInfo;
+        String regToUseAsID;
 
-        // CanBeSold canBeSold = new CanBeSold();
+        ArrayList<CanBeSold> recordsWithMatchingReg = new ArrayList<>();
+        CanBeSold carToBeViewed;
+
+        CanBeSold canBeSold = new CanBeSold();
         for (Car car : carDetailList){
             System.out.print((carDetailList.indexOf(car) + 1) + ": ");
             System.out.println(car.getCarReg());
             
         }
-        System.out.println("Which car would you like to add finance information to? (1 - " + carDetailList.size() + "). Press any other key to cancel");
+        System.out.println("Which car would you like to view finance information for? (1 - " + carDetailList.size() + "). Press any other key to cancel");
         userInput = scanner.nextLine();
 
         try {
-            addFinanceInfo = TryParseInt.tryParseInt(userInput);
+            viewFinanceInfo = TryParseInt.tryParseInt(userInput) - 1;
+            regToUseAsID = carDetailList.get((viewFinanceInfo)).getCarReg();
         }
         catch (IndexOutOfBoundsException ex)
         {
@@ -300,15 +308,26 @@ public class MenuSelection {
             return;
         }
 
-        if (canBeSold.getCashPrice() != 0d)
+
+        for (CanBeSold c : carFinanceInformation)
         {
-            System.out.println("Press enter to view all finance options for " + carDetailList.get((addFinanceInfo - 1)).getCarReg() + ".");
+            if(c.getCarReg().equals(regToUseAsID))
+            {
+                recordsWithMatchingReg.add(c);
+            }
+        }
+        carToBeViewed = recordsWithMatchingReg.getLast();
+
+        if (carToBeViewed.getCashPrice() != 0d)
+        {
+            System.out.println("Press enter to view latest finance options for " + carDetailList.get((viewFinanceInfo)).getCarReg() + ".");
             scanner.nextLine();
-            System.out.println(canBeSold.toString(carDetailList.get((addFinanceInfo - 1))));
+            System.out.println(carToBeViewed.toString());
+            //System.out.println(carFinanceInformation.lastIndexOf(regToUseAsID));
         }
         else
         {
-            System.out.println(carDetailList.get((addFinanceInfo - 1)).getCarReg() + " does not have any finance information uploaded yet. Please make use of (Option 8: Add or edit finance information for a car) to amend this.");
+            System.out.println(carDetailList.get((viewFinanceInfo - 1)).getCarReg() + " does not have any finance information uploaded yet. Please make use of (Option 8: Add or edit finance information for a car) to amend this.");
         }
 
         
@@ -318,11 +337,11 @@ public class MenuSelection {
         scanner.nextLine();
     }//menuselection7
 
-    private void menuSelection8(){
+    private void menuSelection8(){ //add or edit finance information
 
         int editFinanceInfo;
-
         CanBeSold canBeSold = new CanBeSold();
+
         for (Car car : carDetailList){
             System.out.print((carDetailList.indexOf(car) + 1) + ": ");
             System.out.println(car.getCarReg());
@@ -341,44 +360,140 @@ public class MenuSelection {
             return;
         }
 
-        System.out.println("Currently in finance edit mode for " + carDetailList.get((editFinanceInfo)).getCarReg() + ".");
-        //System.out.printf("Cash price (" + carDetailList.get((editFinanceInfo)).getCarReg() + "): %.2f" + canBeSold.getCashPrice());
-        if (canBeSold.getCashPrice() != 0d)
-        {
-            System.out.printf("Cash price (%s): £%.2f%n", carDetailList.get(editFinanceInfo).getCarReg(), canBeSold.getCashPrice());
-            do
-            {
-                System.out.println("Would you like to change this? y/n");
-                userInput = scanner.nextLine().trim().toUpperCase();
-                
-            }
-            while(!(userInput.equals("Y") || userInput.equals("N")));
-            if(userInput.equals("Y"))
-            {
-                boolean valid = false;
-                double newCashPrice;
+        //if (canBeSold.getCashPrice() != 0d)
+            //{
+                double newCashPrice = 0;
+                System.out.printf("Cash price (%s): £%.2f%n", carDetailList.get(editFinanceInfo).getCarReg(), canBeSold.getCashPrice());
                 do
                 {
-                    try
-                    {
-                        System.out.println("Enter new cash price:");
-                        newCashPrice = scanner.nextDouble();
-                        canBeSold.setCashPrice(newCashPrice);
-                        valid = true;
-                    }
-                    catch (InputMismatchException ex)
-                    {
-                        valid = false;
-                        scanner.nextLine();
-                    }
+                    System.out.println("Would you like to change this? y/n");
+                    userInput = scanner.nextLine().trim().toUpperCase();
+                    
                 }
-                while(!valid);
-            }
-        }
-        else
-        {
-            System.out.println("add finance info here");
-        }
+                while(!(userInput.equals("Y") || userInput.equals("N")));
+                if(userInput.equals("Y"))
+                {
+                    boolean valid = false;
+                    do
+                    {
+                        try
+                        {
+                            System.out.println("Enter new cash price:");
+                            newCashPrice = scanner.nextDouble();
+                            scanner.nextLine();
+                            valid = true;
+                        }
+                        catch (InputMismatchException ex)
+                        {
+                            valid = false;
+                            scanner.nextLine();
+                            
+                        }
+                    }
+                    while(!valid);
+                }
+                System.out.printf("Cash price for %s has successfully been set to £%.2f", carDetailList.get(editFinanceInfo).getCarReg(), newCashPrice);
+                
+                int newFinanceDuration = 24;
+                System.out.printf("\nFinance duration (%s): %s months", carDetailList.get(editFinanceInfo).getCarReg(), canBeSold.getFinanceDuration());
+                do
+                {
+                    System.out.println("\nWould you like to change this? y/n");
+                    userInput = scanner.nextLine().trim().toUpperCase();
+                    
+                }
+                while(!(userInput.equals("Y") || userInput.equals("N")));
+                if(userInput.equals("Y"))
+                {
+                    boolean valid = false;
+                    do
+                    {
+                        try
+                        {
+                            System.out.println("Enter new duration:");
+                            newFinanceDuration = scanner.nextInt();
+                            valid = true;
+                        }
+                        catch (InputMismatchException ex)
+                        {
+                            valid = false;
+                            scanner.nextLine();
+                            
+                        }
+                    }
+                    while(!valid);
+                }
+                // canBeSold.setFinanceDuration(newFinanceDuration);
+                carFinanceInformation.add(new CanBeSold(carDetailList.get(editFinanceInfo), newCashPrice, newFinanceDuration));
+                // canBeSold.setCashPrice(newCashPrice);
+                
+            //}
+            //else
+            // {
+                // System.out.println("add section here");
+            // }
+
+        
+
+        
+        // boolean carIsCanBeSold = false;
+        // for (CanBeSold caneSold : carFinanceInformation)
+        // {
+        //     for (Car car : carDetailList)
+        //     {
+        //         if(car.getCarReg().equals(canBeSold.getCarReg()))
+        //         {
+        //             carIsCanBeSold = true;
+        //             return;
+        //         }
+        //         else
+        //         {
+        //             System.out.println("no finance info found");
+        //         }
+        //     }
+        // }
+
+        // if(carIsCanBeSold)
+        // {
+        //     System.out.println("Currently in finance edit mode for " + carDetailList.get((editFinanceInfo)).getCarReg() + ".");
+        //     //System.out.printf("Cash price (" + carDetailList.get((editFinanceInfo)).getCarReg() + "): %.2f" + canBeSold.getCashPrice());
+        //     if (canBeSold.getCashPrice() != 0d)
+        //     {
+        //         System.out.printf("Cash price (%s): £%.2f%n", carDetailList.get(editFinanceInfo).getCarReg(), canBeSold.getCashPrice());
+        //         do
+        //         {
+        //             System.out.println("Would you like to change this? y/n");
+        //             userInput = scanner.nextLine().trim().toUpperCase();
+                    
+        //         }
+        //         while(!(userInput.equals("Y") || userInput.equals("N")));
+        //         if(userInput.equals("Y"))
+        //         {
+        //             boolean valid = false;
+        //             double newCashPrice;
+        //             do
+        //             {
+        //                 try
+        //                 {
+        //                     System.out.println("Enter new cash price:");
+        //                     newCashPrice = scanner.nextDouble();
+        //                     canBeSold.setCashPrice(newCashPrice);
+        //                     valid = true;
+        //                 }
+        //                 catch (InputMismatchException ex)
+        //                 {
+        //                     valid = false;
+        //                     scanner.nextLine();
+        //                 }
+        //             }
+        //             while(!valid);
+        //         }
+        //     }
+        //     else
+        //     {
+        //         System.out.println("add finance info here");
+        //     }
+        // }
 
         System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
