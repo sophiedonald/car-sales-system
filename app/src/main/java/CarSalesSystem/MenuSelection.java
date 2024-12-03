@@ -1,4 +1,4 @@
-package app.src.main.java.CarSalesSystem;
+package CarSalesSystem;
 
 import java.util.ArrayList;
 import java.util.InputMismatchException;
@@ -41,23 +41,23 @@ public class MenuSelection {
         
 
         switch (userInput){
-            case "1" -> menuSelection1();
-            case "2" -> menuSelection2();
-            case "3" -> menuSelection3();
-            case "4" -> menuSelection4();
-            case "5" -> menuSelection5();
-            case "6" -> menuSelection6();
-            case "7" -> menuSelection7();
-            case "8" -> menuSelection8();
-            case "exit" -> {
+            case "1": menuSelection1(); break;
+            case "2": menuSelection2(); break;
+            case "3": menuSelection3(); break;
+            case "4": menuSelection4(); break;
+            case "5": menuSelection5(); break;
+            case "6": menuSelection6(); break;
+            case "7": menuSelection7(); break;
+            case "8": menuSelection8(); break;
+            case "exit":
                 System.out.println("Goodbye");
                 exit = true;
-            }
-            default -> {
+                break;
+            default:
                 System.out.println("Invalid Option");
                 System.out.println("Press enter to continue");
                 scanner.nextLine();
-            }
+                break;
         }
     }//mainMenu()
 
@@ -349,6 +349,25 @@ public class MenuSelection {
             System.out.println("Press enter to view latest finance options for " + carDetailList.get((indexToView)).getCarReg() + ".");
             scanner.nextLine();
             System.out.println(carToBeViewed.displayDetails(carToBeViewed));
+
+            do{
+                System.out.println("Would you like to change the cash price for " + carToBeViewed.getCarReg() + "?");
+                userInput = scanner.nextLine().toUpperCase();
+                if(userInput.startsWith("Y")){
+                    System.out.println("Enter new cash price:");
+                    try{
+                        double newCashPrice = scanner.nextDouble();
+                        carFinanceList.add(new CanBeSold(newCashPrice, carToAccessFinanceInfo));
+                    }
+                    catch (InputMismatchException e)
+                    {
+                        System.out.println("Invalid entry, please try again.");
+                    }
+                }
+                else if(userInput.startsWith("N"));
+
+            }
+            while (!(userInput.startsWith("Y") || userInput.startsWith("N")));
         }
 
        

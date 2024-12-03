@@ -1,4 +1,4 @@
-package app.src.main.java.CarSalesSystem;
+package CarSalesSystem;
 
 import java.util.Scanner;
 interface addAllFields{
@@ -118,13 +118,13 @@ public class AddField implements addAllFields{
     {
         do
         {
-            System.out.println("What is the mileage of " + tempCarDetails[0] + "?"); //not required
+            System.out.println("What is the mileage of " + tempCarDetails[0] + "? Press enter if unsure"); //not required
             MenuSelection.userInput = scanner.nextLine().toUpperCase();
             if (MenuSelection.userInput != null)
             {
                 if(MenuSelection.userInput.equals(""))
                 {
-                    System.out.println("no entry recognised");
+                    System.out.println("Question skipped. To add a mileage to this car, make use of option 4 or 5.");
                     
                     
                 }
@@ -161,7 +161,11 @@ public class AddField implements addAllFields{
             MenuSelection.userInput = scanner.nextLine();
             if (MenuSelection.userInput != null)
             {
-                if(TryParseInt.tryParseInt(MenuSelection.userInput) < 0) //includes -1 which is returned upon parse failure
+                if(MenuSelection.userInput.equals(""))
+                {
+                    System.out.println("Question skipped. To add a mileage to this car, make use of option 4 or 5.");
+                }
+                else if(TryParseInt.tryParseInt(MenuSelection.userInput) < 0) //includes -1 which is returned upon parse failure
                 {
                     System.out.println("Invalid entry. Please make use of the (4: Check all fields are complete) or (5: Edit fields) options to amend this later on.");
                 }

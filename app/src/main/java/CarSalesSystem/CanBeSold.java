@@ -1,4 +1,4 @@
-package app.src.main.java.CarSalesSystem;
+package CarSalesSystem;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
