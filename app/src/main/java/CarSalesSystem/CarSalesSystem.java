@@ -1,3 +1,6 @@
+package app.src.main.java.CarSalesSystem;
+
+
 public class CarSalesSystem{
         public static void main(String[] args) 
         {

@@ -1,3 +1,6 @@
+package app.src.main.java.CarSalesSystem;
+
+
 public class TryParseInt{    
     public static int tryParseInt(String toBeParsed)
     {

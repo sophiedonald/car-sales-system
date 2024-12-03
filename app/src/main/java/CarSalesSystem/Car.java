@@ -1,10 +1,12 @@
-interface requiredCar {
-    public void setCarReg(String reg);
-    public void setCarMake(String make);
-    public void setCarModel(String model);
+package app.src.main.java.CarSalesSystem;
+
+
+
+interface IDisplayDetails{
+    public String displayDetails(Car car);
 }
 
-public class Car implements requiredCar{
+public class Car implements IDisplayDetails{
 
     //create all fields for the car properties
     private String CarReg; //if naming static, then all cars have the same reg etc
@@ -60,7 +62,6 @@ public class Car implements requiredCar{
     public String getCarReg(){ //cannot be static because for the instances not the whole class
         return this.CarReg;
     }
-    @Override
     public void setCarReg(String reg){
         this.CarReg = reg;
     }
@@ -69,7 +70,6 @@ public class Car implements requiredCar{
     public String getCarMake(){
         return this.CarMake;
     }
-    @Override
     public void setCarMake(String make){
         this.CarMake = make;
     }
@@ -78,7 +78,6 @@ public class Car implements requiredCar{
     public String getCarModel(){
         return this.CarModel;
     }
-    @Override
     public void setCarModel(String model){
         this.CarModel = model;
     }
@@ -122,7 +121,7 @@ public class Car implements requiredCar{
     }
 
     //override method to print all information formatted
-    public String toString(Car car) { //prints all information inline
+    public String displayDetails(Car car) { //prints all information inline
         String carSummary;
 
         if (car.CarMileage == -1 && car.CarAge == -1)
