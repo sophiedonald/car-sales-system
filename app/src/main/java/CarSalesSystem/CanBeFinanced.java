@@ -18,7 +18,7 @@ public class CanBeFinanced extends CanBeSold{
     public CanBeFinanced(int financeDuration, CanBeSold canBeSold){
         this.FinanceDuration = financeDuration;
         this.FinanceDeposit = 0.3 * canBeSold.getCashPrice();
-        this.FinanceTotalInterest = this.getCashPrice() * FinanceInterestPercetage;
+        this.FinanceTotalInterest = (this.getCashPrice() * FinanceInterestPercetage);
         this.FinanceTotalPayment = this.getCashPrice() + this.FinanceTotalInterest;
         this.FinanceMonthlyPayment = this.FinanceTotalPayment / financeDuration;
         this.setCashPrice(canBeSold.getCashPrice());

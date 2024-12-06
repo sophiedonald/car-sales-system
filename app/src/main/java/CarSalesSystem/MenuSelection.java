@@ -32,7 +32,7 @@ public class MenuSelection {
         System.out.println("3: Delete a car from the Vroom Vroom Vault");
         System.out.println("4: Check all current car fields are complete");
         System.out.println("5: Edit the details of a car");
-        System.out.println("6: Display all cars with a certain make, model, mileage or colour");
+        System.out.println("6: Search through all cars");
         System.out.println("7: View latest, add or edit a single car's finance information");
         System.out.println("8: View a record of all finance information changes");
         System.out.println("Which option would you like to choose? (type exit to exit Vroom Vroom Vault)");
@@ -327,10 +327,10 @@ public class MenuSelection {
 
         if(cashRecordsWithMatchingReg.isEmpty())
         {
-            System.out.println(carDetailList.get((indexToView)).getCarReg() + " does not have a cash price uploaded yet, would you like to add one now? y/n");
-            userInput = scanner.nextLine().toUpperCase();
             do
-                {
+            {
+                System.out.println(carDetailList.get((indexToView)).getCarReg() + " does not have a cash price uploaded yet, would you like to add one now? y/n");
+                userInput = scanner.nextLine().toUpperCase();
                 if(userInput.startsWith("Y"))
                 {
                     canBeSold.AddCashPrice(carToAccessFinanceInfo);

@@ -40,7 +40,6 @@ public class CanBeSold extends Car{
 
     public void AddCashPrice(Car car){
 
-        System.out.println("Adding car information to " + car.getCarReg());
         System.out.println("What is the cash price of " + car.getCarReg() + "? (GBP)");
 
         boolean validInput = false;
