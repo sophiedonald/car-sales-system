@@ -1,4 +1,4 @@
-package CarSalesSystem;
+package carsalessystem;
 
 import java.util.InputMismatchException;
 
@@ -28,6 +28,10 @@ public class CanBeFinanced extends CanBeSold{
         this.setCarMileage(canBeSold.getCarMileage());
         this.setCarAge(canBeSold.getCarAge());
         this.setCarFeatures(canBeSold.getCarFeatures());
+    }
+
+    public int getFinanceDuration(){
+        return this.FinanceDuration;
     }
 
     // public CanBeFinanced(int financeDuration, double cashPrice, String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){

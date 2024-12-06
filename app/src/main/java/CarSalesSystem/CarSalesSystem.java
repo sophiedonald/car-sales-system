@@ -1,6 +1,4 @@
-package CarSalesSystem;
-
-
+package carsalessystem;
 public class CarSalesSystem{
         public static void main(String[] args) 
         {

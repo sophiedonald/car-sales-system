@@ -1,6 +1,4 @@
-package CarSalesSystem;
-
-
+package carsalessystem;
 public class TryParseInt{    
     public static int tryParseInt(String toBeParsed)
     {

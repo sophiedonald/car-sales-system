@@ -1,6 +1,4 @@
-package CarSalesSystem;
-
-
+package carsalessystem;
 
 interface IDisplayDetails{
     public String displayDetails(Car car);

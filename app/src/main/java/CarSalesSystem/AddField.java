@@ -1,5 +1,4 @@
-package CarSalesSystem;
-
+package carsalessystem;
 import java.util.Scanner;
 interface addAllFields{
     public void addCarReg();

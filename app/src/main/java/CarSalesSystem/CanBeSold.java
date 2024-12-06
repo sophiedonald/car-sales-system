@@ -1,4 +1,4 @@
-package CarSalesSystem;
+package carsalessystem;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -43,7 +43,9 @@ public class CanBeSold extends Car{
         System.out.println("Adding car information to " + car.getCarReg());
         System.out.println("What is the cash price of " + car.getCarReg() + "? (GBP)");
 
+        boolean validInput = false;
         double newCashPrice = 0;
+
         do{
             try
             {
@@ -52,15 +54,18 @@ public class CanBeSold extends Car{
                 {
                     throw new Exception();
                 }
+                validInput = true;
+                
             }
             catch (Exception ex)
             {
                 System.out.println("Invalid entry. Please enter a new cash price");
             }
         }
-        while (newCashPrice == 0);
+        while (validInput == false);
 
         MenuSelection.carCashPriceList.add(new CanBeSold(newCashPrice, car));
+        //System.out.println("Bottom of addcashprice method");
         
     }
 }
