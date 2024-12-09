@@ -325,7 +325,7 @@ public class MenuSelection {
             }
         }
 
-        if(cashRecordsWithMatchingReg.isEmpty())
+        if(cashRecordsWithMatchingReg.isEmpty()) //if the selected car does NOT have a cash price - therefore doesnt have finance options
         {
             do
             {
@@ -334,21 +334,35 @@ public class MenuSelection {
                 if(userInput.startsWith("Y"))
                 {
                     canBeSold.AddCashPrice(carToAccessFinanceInfo);
-                    //System.out.println("method to add finance info");
-                    canBeFinanced.AddFinanceInfo(carCashPriceList.getLast());
-                }
-                else if(userInput.startsWith("N"))
-                {
-                    //System.out.println("does not want to add finance info");
                 }
             }while (!(userInput.startsWith("N") || userInput.startsWith("Y")));
+            userInput="";
+
+            do
+            {
+                System.out.println("Would you like to add financing options for " + canBeSold.getCarReg() + "? y/n");
+                userInput = scanner.nextLine().toUpperCase();
+                if(userInput.startsWith("Y"))
+                {
+                    canBeFinanced.AddFinanceInfo(carCashPriceList.getLast());
+                }
+            }while (!(userInput.startsWith("N") || userInput.startsWith("Y")));
+            userInput="";
         }
-        else //if there are existing records for this reg
+        else //if there are existing CASH PRICE records for this reg - may or may not have finance info
         {
             carToBeViewed = cashRecordsWithMatchingReg.getLast();
             System.out.println("Press enter to view latest finance options for " + carDetailList.get((indexToView)).getCarReg() + ".");
             scanner.nextLine();
-            System.out.println(carToBeViewed.displayDetails(carToBeViewed));
+            System.out.print(carToBeViewed.displayDetails(carToBeViewed));
+            for (int i = 0 ; i < carFinanceList.size() ; i++) //use this to add the display finance info on option 8
+                {
+                    if (carToBeViewed.getCarReg().equals(carFinanceList.get(i).getCarReg()) && (carToBeViewed.getCashPrice() == carFinanceList.get(i).getCashPrice()))
+                    {
+                        System.out.print("\tFinance Duration: " + carFinanceList.get(i).getFinanceDuration() + " months");
+                    }
+                }
+            System.out.println();
 
             do{
                 System.out.println("Would you like to change the cash price for " + carToBeViewed.getCarReg() + "? y/n");
@@ -380,6 +394,7 @@ public class MenuSelection {
                 }
             }
             while (!(userInput.startsWith("Y") || userInput.startsWith("N")));
+            userInput="";
 
             for (CanBeFinanced CBF : carFinanceList)
             {
@@ -389,22 +404,21 @@ public class MenuSelection {
                 }
             }
 
-            if(financeRecordsWithMatchingReg.isEmpty()){
-                System.out.println(carDetailList.get((indexToView)).getCarReg() + " does not have finance info uploaded yet, would you like to add some now? y/n");
-                userInput = scanner.nextLine().toUpperCase();
+            if(financeRecordsWithMatchingReg.isEmpty()){ //if there are no finance options
                 do
-                    {
+                {
+                    System.out.println(carDetailList.get((indexToView)).getCarReg() + " does not have finance info uploaded yet, would you like to add some now? y/n");
+                    userInput = scanner.nextLine().toUpperCase();
                     if(userInput.startsWith("Y"))
                     {
-                        //canBeSold.AddCashPrice(carToAccessFinanceInfo);
                         canBeFinanced.AddFinanceInfo(cashRecordsWithMatchingReg.getLast());
-                        //System.out.println("method to add finance info");
-                    }
-                    else if(userInput.startsWith("N"))
-                    {
-                        //System.out.println("does not want to add finance info");
                     }
                 }while (!(userInput.startsWith("N") || userInput.startsWith("Y")));
+                userInput="";
+            }
+            else //if there are existing FINANCE options
+            {
+                System.out.println("Latest finance info: " + financeRecordsWithMatchingReg.getLast().displayDetails(financeRecordsWithMatchingReg.getLast()));
             }
         }
 
@@ -425,10 +439,9 @@ public class MenuSelection {
                 System.out.print(cBS.displayDetails(cBS));
                 for (int i = 0 ; i < carFinanceList.size() ; i++) //use this to add the display finance info on option 8
                 {
-                    System.out.print("in for loop");
                     if (cBS.getCarReg().equals(carFinanceList.get(i).getCarReg()) && (cBS.getCashPrice() == carFinanceList.get(i).getCashPrice()))
                     {
-                        System.out.print("Finance Duration: " + carFinanceList.get(i).getFinanceDuration());
+                        System.out.print("\tFinance Duration: " + carFinanceList.get(i).getFinanceDuration() + " months");
                     }
                 }
                 System.out.println();
