@@ -16,13 +16,13 @@ class CarTest {
     @Test
     void testConstructorAndGetters() {
         // Test the constructor and getters
-        assertEquals("SD24SJD", car.getCarReg()); //Should be uppercase and spaces removed
-        assertEquals("FORD", car.getCarMake());  // Should be uppercase
-        assertEquals("FOCUS", car.getCarModel());  // Should be uppercase
+        assertEquals("SD24SJD", car.getCarReg());
+        assertEquals("TOYOTA", car.getCarMake());  // Should be uppercase
+        assertEquals("COROLLA", car.getCarModel());  // Should be uppercase
         assertEquals(50000, car.getCarMileage());
         assertEquals(9, car.getCarAge());  // Age = 2024 - 2015
         assertEquals("BLUE", car.getCarColour());  // Should be uppercase
-        assertEquals("AIR CON AND USB PORTS", car.getCarFeatures());  // Should be uppercase
+        assertEquals("AIR CONDITIONING", car.getCarFeatures());  // Should be uppercase
     }
 
     @Test
