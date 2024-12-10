@@ -2,26 +2,26 @@ package carsalessystem;
 
 import java.util.InputMismatchException;
 
-public class CanBeFinanced extends CanBeSold{
-    
+public class CanBeFinanced extends CanBeSold {
+
+    private static double FinanceInterestPercentage = 9.55 / 100d; //hardcoded interest percentage
     private double FinanceDeposit;
     private double FinanceMonthlyPayment;
     private double FinanceTotalInterest;
     private double FinanceTotalPayment;
     private int FinanceDuration;
-    private static double FinanceInterestPercentage = 9.55/100d; //hardcoded interest percentage
 
-    public CanBeFinanced(){
+    public CanBeFinanced() {
 
     }
 
-    public CanBeFinanced(int financeDuration, CanBeSold canBeSold){
+    public CanBeFinanced(int financeDuration, CanBeSold canBeSold) {
         this.FinanceDuration = financeDuration;
         this.FinanceDeposit = 0.3 * canBeSold.getCashPrice();
         this.FinanceTotalInterest = canBeSold.getCashPrice() * getFinanceInterestPercentage();
         this.FinanceTotalPayment = canBeSold.getCashPrice() + (canBeSold.getCashPrice() * getFinanceInterestPercentage());
         this.FinanceMonthlyPayment = (canBeSold.getCashPrice() + (canBeSold.getCashPrice() * getFinanceInterestPercentage())) / financeDuration;
-    
+
         this.setCashPrice(canBeSold.getCashPrice());
         this.setCarReg(canBeSold.getCarReg());
         this.setCarMake(canBeSold.getCarMake());
@@ -31,12 +31,12 @@ public class CanBeFinanced extends CanBeSold{
         this.setCarFeatures(canBeSold.getCarFeatures());
     }
 
-    public int getFinanceDuration(){
-        return this.FinanceDuration;
+    public static double getFinanceInterestPercentage() {
+        return FinanceInterestPercentage;
     }
 
-    public static double getFinanceInterestPercentage(){
-        return FinanceInterestPercentage;
+    public int getFinanceDuration() {
+        return this.FinanceDuration;
     }
 
     // public CanBeFinanced(int financeDuration, double cashPrice, String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){
@@ -48,41 +48,30 @@ public class CanBeFinanced extends CanBeSold{
     //     this.FinanceTotalInterest = this.getCashPrice() * this.FinanceInterestPercetage;
     // }
 
-    public void AddFinanceInfo(CanBeSold canBeSold){
-        // do{
-        //     System.out.println("Would you like to add financing options for " + canBeSold.getCarReg() + "? y/n");
-        //     MenuSelection.userInput = scanner.nextLine().toUpperCase();
-        //     if(MenuSelection.userInput.startsWith("N")) return;
-        // }
-        // while(!(MenuSelection.userInput.startsWith("Y") || MenuSelection.userInput.startsWith("N")));
-
-            //System.out.printf("Cash price: £%.2f", canBeSold.getCashPrice());
-            int newFinanceDuration = 0;
-            do{
-                try{
-                    System.out.println("Please enter the duration of the finance agreement (months):");
-                    newFinanceDuration = scanner.nextInt();
-                    if(newFinanceDuration >= 60){
-                        System.out.println("Maximum length of finance duration is 59 months.");
-                        newFinanceDuration = 0;
-                    }
+    public void AddFinanceInfo(CanBeSold canBeSold) {
+        int newFinanceDuration = 0;
+        do {
+            try {
+                System.out.println("Please enter the duration of the finance agreement (months):");
+                newFinanceDuration = scanner.nextInt();
+                if (newFinanceDuration >= 60) {
+                    System.out.println("Maximum length of finance duration is 59 months.");
+                    newFinanceDuration = 0;
                 }
-                catch (InputMismatchException ex)
-                {
-                    System.out.println("Invalid entry. PLease enter a new finance duration (months)");
-                }
+            } catch (InputMismatchException ex) {
+                System.out.println("Invalid entry. Please enter a new finance duration (months)");
+                scanner.nextLine(); // Clear the invalid input
             }
-            while(newFinanceDuration == 0);
+        } while (newFinanceDuration == 0);
 
-            MenuSelection.carFinanceList.add(new CanBeFinanced(newFinanceDuration, canBeSold));
-//            for(CanBeFinanced canBeFinanced : MenuSelection.carFinanceList){
-//                System.out.println(canBeFinanced.displayDetails(canBeFinanced));
-//            }
-            System.out.println(displayDetails(MenuSelection.carFinanceList.getLast()));
+        // Create a new CanBeFinanced object with the updated cash price
+        CanBeFinanced newFinance = new CanBeFinanced(newFinanceDuration, canBeSold);
+        MenuSelection.carFinanceList.add(newFinance);
+        System.out.println(newFinance.displayDetails(newFinance));
     }
 
-    public String displayDetails(CanBeFinanced canBeFinanced)
-    {
+
+    public String displayDetails(CanBeFinanced canBeFinanced) {
         return String.format("\tFinance Duration: %d months\n\tInitial Deposit: £%.2f\n\tMonthly Payment: £%.2f\n\tTotal Payment: £%.2f (Interest rate %.2f%%)", canBeFinanced.FinanceDuration, canBeFinanced.FinanceDeposit, canBeFinanced.FinanceMonthlyPayment, canBeFinanced.FinanceTotalPayment, canBeFinanced.FinanceInterestPercentage * 100);
     }
 }
