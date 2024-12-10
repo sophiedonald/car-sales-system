@@ -80,6 +80,6 @@ public class CanBeFinanced extends CanBeSold{
 
     public String displayDetails(CanBeFinanced canBeFinanced)
     {
-        return String.format("Finance Duration: %d\nInitial Deposit: %.2f\nMonthly Payment: %.2f\nTotal Payment: %.2f (Interest rate %.3f)", canBeFinanced.FinanceDuration, canBeFinanced.FinanceDeposit, canBeFinanced.FinanceMonthlyPayment, canBeFinanced.FinanceTotalPayment, canBeFinanced.FinanceInterestPercentage);
+        return String.format("Finance Duration: %d\n\tInitial Deposit: %.2f\n\tMonthly Payment: %.2f\n\tTotal Payment: %.2f (Interest rate %.3f)", canBeFinanced.FinanceDuration, canBeFinanced.FinanceDeposit, canBeFinanced.FinanceMonthlyPayment, canBeFinanced.FinanceTotalPayment, canBeFinanced.FinanceInterestPercentage);
     }
 }

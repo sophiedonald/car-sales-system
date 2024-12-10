@@ -51,10 +51,10 @@ public class Car implements IDisplayDetails{
     public static int getCarCount() { //can be static because is in the class not the instances/objects
         return carCount;
     }
-    public static void setCarCount(int incrementAmount)
-    {
-        carCount += incrementAmount;
-    }
+    // public static void setCarCount(int incrementAmount)
+    // {
+    //     carCount += incrementAmount;
+    // }
 
     //registration plate
     public String getCarReg(){ //cannot be static because for the instances not the whole class

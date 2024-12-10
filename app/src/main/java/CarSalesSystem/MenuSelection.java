@@ -10,12 +10,8 @@ public class MenuSelection {
     public static boolean exit = false;
     public static ArrayList<Car> carDetailList = new ArrayList<>(); //create a list to store each instance of the class Car
     private final int maxCars = 10; //maximum amount of cars which can be in stock, not going to change throughout programme
-    //private final String[] currentField = {"registration plate", "make", "model", "mileage", "age", "colour", "feature"};
-    //private String field;
     public static ArrayList<CanBeSold> carCashPriceList = new ArrayList<>();
     public static ArrayList<CanBeFinanced> carFinanceList = new ArrayList<>();
-
-    //CanBeSold canBeSold = new CanBeSold();
 
     private boolean anotherCar = true;
 
@@ -41,14 +37,14 @@ public class MenuSelection {
         
 
         switch (userInput){
-            case "1": menuSelection1(); break;
-            case "2": menuSelection2(); break;
-            case "3": menuSelection3(); break;
-            case "4": menuSelection4(); break;
-            case "5": menuSelection5(); break;
-            case "6": menuSelection6(); break;
-            case "7": menuSelection7(); break;
-            case "8": menuSelection8(); break;
+            case "1": listExistingCars(); break;
+            case "2": addNewCar(); break;
+            case "3": deleteExistingCar(); break;
+            case "4": checkExistingFields(); break;
+            case "5": editExistingFields(); break;
+            case "6": searchExistingFields(); break;
+            case "7": viewFinance(); break;
+            case "8": viewFinanceRecord(); break;
             case "exit":
                 System.out.println("Goodbye");
                 exit = true;
@@ -61,7 +57,7 @@ public class MenuSelection {
         }
     }//mainMenu()
 
-    private void menuSelection1(){
+    private void listExistingCars(){
         System.out.println("You have chosen option 1: display all current car information. We currently have " + Car.getCarCount() + " cars in stock.");
         for(Car car : carDetailList){
 
@@ -73,7 +69,7 @@ public class MenuSelection {
         scanner.nextLine();
     }//menuSeleciton1()
 
-    private void menuSelection2(){
+    private void addNewCar(){
 
         AddField addField = new AddField();
 
@@ -131,9 +127,9 @@ public class MenuSelection {
         }
         System.out.println("Press enter to continue");
         scanner.nextLine();
-    }//menuSelection2()
+    }//addNewCar()
 
-    private void menuSelection3(){ //Delete
+    private void deleteExistingCar(){ //Delete
         System.out.println("You have chosen option 3: delete a car from the Vroom Vroom Vault.");
 
         if (!carDetailList.isEmpty())
@@ -165,9 +161,9 @@ public class MenuSelection {
         //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
-    }//menuSelection3
+    }//deleteExistingCar
 
-    private void menuSelection4(){ //Check
+    private void checkExistingFields(){ //Check
         AddField addField = new AddField();
         System.out.println("You have chosen option 4: check all current car fields are complete");
 
@@ -181,9 +177,9 @@ public class MenuSelection {
         //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
-    }//menuSelection4
+    }//checkExistingFields
 
-    private void menuSelection5(){ //Edit
+    private void editExistingFields(){ //Edit
         System.out.println("You have chosen option 5: edit the details of a car");
 
         System.out.println("Vroom Vroom Vault currently has " + Car.getCarCount() + " cars in stock:");
@@ -251,7 +247,7 @@ public class MenuSelection {
         scanner.nextLine();
     }//
 
-    private void menuSelection6(){ //Search
+    private void searchExistingFields(){ //Search
         int numberOfMatches = 0;
         System.out.println("You have chosen option 6: search through Vroom Vroom Vault");
 
@@ -282,7 +278,7 @@ public class MenuSelection {
         scanner.nextLine();
     }
 
-    private void menuSelection7(){ //view finance information
+    private void viewFinance(){ //view finance information
 
         int indexToView;
         String regToUseAsID;
@@ -334,20 +330,20 @@ public class MenuSelection {
                 if(userInput.startsWith("Y"))
                 {
                     canBeSold.AddCashPrice(carToAccessFinanceInfo);
+                    userInput="";
+                    do
+                    {
+                        System.out.println("Would you like to add financing options for " + carDetailList.get((indexToView)).getCarReg() + "? y/n");
+                        userInput = scanner.nextLine().toUpperCase();
+                        if(userInput.startsWith("Y"))
+                        {
+                            canBeFinanced.AddFinanceInfo(carCashPriceList.getLast());
+                        }
+                    }while (!(userInput.startsWith("N") || userInput.startsWith("Y")));
                 }
             }while (!(userInput.startsWith("N") || userInput.startsWith("Y")));
             userInput="";
 
-            do
-            {
-                System.out.println("Would you like to add financing options for " + canBeSold.getCarReg() + "? y/n");
-                userInput = scanner.nextLine().toUpperCase();
-                if(userInput.startsWith("Y"))
-                {
-                    canBeFinanced.AddFinanceInfo(carCashPriceList.getLast());
-                }
-            }while (!(userInput.startsWith("N") || userInput.startsWith("Y")));
-            userInput="";
         }
         else //if there are existing CASH PRICE records for this reg - may or may not have finance info
         {
@@ -384,6 +380,7 @@ public class MenuSelection {
                             }
                             carCashPriceList.add(new CanBeSold(newCashPrice, carToAccessFinanceInfo));
                             valid = true;
+                            canBeFinanced.AddFinanceInfo(carCashPriceList.getLast()); //gets the CanBeSold object which has just been added
                         }
                         catch (InputMismatchException ex)
                         {
@@ -429,10 +426,10 @@ public class MenuSelection {
         //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
-    }//menuselection7
+    }//viewFinance
 
     
-    public void menuSelection8(){
+    public void viewFinanceRecord(){
         if(!carCashPriceList.isEmpty()){
             for (CanBeSold cBS : carCashPriceList)
             {
@@ -458,7 +455,7 @@ public class MenuSelection {
 
 
 
-    // private void menuSelection8(){ //add or edit finance information
+    // private void viewFinanceRecord(){ //add or edit finance information
 
     //     int editFinanceInfo;
     //     CanBeSold canBeSold = new CanBeSold();
@@ -619,4 +616,4 @@ public class MenuSelection {
         // System.out.println("COMING SOON");
         // System.out.println("Press enter to continue");
         // scanner.nextLine();
-    }//menuselection8
+    }//viewFinanceRecord
