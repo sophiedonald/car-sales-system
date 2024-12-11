@@ -343,8 +343,8 @@ public class MenuSelection {
                             if (newCashPrice <= 0 || newCashPrice == carToBeViewed.getCashPrice()) {
                                 throw new InputMismatchException();
                             }
-                            carToBeViewed.setCashPrice(newCashPrice);
                             carCashPriceList.add(new CanBeSold(newCashPrice, carToAccessFinanceInfo));
+                            //carToBeViewed.setCashPrice(newCashPrice);
                             valid = true;
                         } catch (InputMismatchException ex) {
                             scanner.nextLine();
@@ -361,6 +361,11 @@ public class MenuSelection {
                     financeRecordsWithMatchingReg.add(CBF);
                 }
             }
+            for (CanBeSold CBS : carCashPriceList) { //update list to potentially include the new cash price we've just added
+                if (CBS.getCarReg().equals(regToUseAsID)) {
+                    cashRecordsWithMatchingReg.add(CBS);
+                }
+            }
 
             if (financeRecordsWithMatchingReg.isEmpty()) { //if there are no finance options
                 do {
@@ -373,10 +378,13 @@ public class MenuSelection {
                 userInput = "";
             } else //if there are existing FINANCE options
             {
-                if (financeRecordsWithMatchingReg.getLast().getCashPrice() != carCashPriceList.getLast().getCashPrice()) {
+                if (financeRecordsWithMatchingReg.getLast().getCashPrice() != carCashPriceList.getLast().getCashPrice()) //if cash price has changed
+                {
                     System.out.println("You have changed the cash price for " + carDetailList.get((indexToView)).getCarReg() + ". Finance information must be updated.");
                     canBeFinanced.AddFinanceInfo(cashRecordsWithMatchingReg.getLast());
-                } else {
+                }
+                else //if cash price has not changed
+                {
                     System.out.println("Latest finance info: " + financeRecordsWithMatchingReg.getLast().displayDetails(financeRecordsWithMatchingReg.getLast()));
                     do {
                         System.out.println("Would you like to change the finance duration? y/n");
@@ -396,10 +404,11 @@ public class MenuSelection {
 
     public void viewFinanceRecord() {
         if(!carCashPriceList.isEmpty()) {
+            System.out.println("---------------------------");
             System.out.println("Cash price changes:");
             for (CanBeSold cashPriceRecord : carCashPriceList) {
                 System.out.print(cashPriceRecord.getCarReg());
-                System.out.println("\tCash Price: " + cashPriceRecord.getCashPrice());
+                System.out.println("\tCash Price: £" + cashPriceRecord.getCashPrice());
             }
             System.out.println("---------------------------");
         }
@@ -409,11 +418,12 @@ public class MenuSelection {
 
 
         if (!carFinanceList.isEmpty()) {
+            System.out.println("---------------------------");
             System.out.println("Finance record changes:");
             for (CanBeFinanced financeRecord : carFinanceList) {
                 System.out.print(financeRecord.getCarReg() + " Cash Price: £" + financeRecord.getCashPrice());
                 System.out.print("\t\tFinance duration: " + financeRecord.getFinanceDuration() + " months");
-                System.out.print("\t\tMonthly payment: " + financeRecord.getFinanceDurationMonthlyPayment());
+                System.out.printf("\t\tMonthly payment: £%.2f", financeRecord.getFinanceDurationMonthlyPayment());
                 System.out.print("\t\tInterest rate: " + (CanBeFinanced.getFinanceInterestPercentage() * 100) + "%");
                 System.out.println();
             }

@@ -191,24 +191,14 @@ public class AddField implements addAllFields{
         {
             System.out.println("What is the colour of " + tempCarDetails[0] + "?"); //not required
             MenuSelection.userInput = scanner.nextLine().toUpperCase();
-            if (MenuSelection.userInput != null)
-            {
-                if(MenuSelection.userInput.equals(""))
-                {
-                    System.out.println("Question skipped. To add a colour to this car, make use of option 5.");
-                }
-                else
-                {
-                    tempCarDetails[5] = MenuSelection.userInput;
-                    validInput = true;
-                }
-            }
-            else
-            {
-                validInput = false;
+            if (MenuSelection.userInput.isEmpty()) {
+                System.out.println("Question skipped. To add a colour to this car, make use of option 5.");
+            } else {
+                tempCarDetails[5] = MenuSelection.userInput;
+                validInput = true;
             }
         }
-        while (validInput == false);
+        while (!validInput);
     }
 
     public void addCarFeatures()
@@ -217,16 +207,13 @@ public class AddField implements addAllFields{
         {
             System.out.println("What are the features of " + tempCarDetails[0] + "?"); //not required
             MenuSelection.userInput = scanner.nextLine().toUpperCase();
-            if (MenuSelection.userInput != null)
-            {
+            if (MenuSelection.userInput.isEmpty()) {
+                System.out.println("Question skipped. To add a colour to this car, make use of option 5.");
+            } else {
                 tempCarDetails[6] = MenuSelection.userInput;
                 validInput = true;
             }
-            else
-            {
-                validInput = false;
-            }
         }
-        while (validInput == false);
+        while (!validInput);
     }
 }

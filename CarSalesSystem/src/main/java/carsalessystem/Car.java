@@ -30,8 +30,8 @@ public class Car implements IDisplayDetails{
         {
             this.CarAge = carAge;
         }
-        this.CarColour = carColour.toUpperCase();
-        this.CarFeatures = carFeatures.toUpperCase();
+        this.CarColour = carColour == null ? "" : carColour.toUpperCase();
+        this.CarFeatures = carFeatures == null ? "" : carFeatures.toUpperCase();
 
         carCount++;
     }
@@ -107,7 +107,8 @@ public class Car implements IDisplayDetails{
         return this.CarColour;
     }
     public void setCarColour(String colour){
-        this.CarColour = colour.toUpperCase();
+        if(!colour.isEmpty())
+            this.CarColour = colour.toUpperCase();
     }
 
     //car features
@@ -115,7 +116,8 @@ public class Car implements IDisplayDetails{
         return this.CarFeatures;
     }
     public void setCarFeatures(String features){
-        this.CarFeatures = features.toUpperCase();
+        if(!features.isEmpty())
+            this.CarFeatures = features.toUpperCase();
     }
 
     //override method to print all information formatted
@@ -124,19 +126,19 @@ public class Car implements IDisplayDetails{
 
         if (car.CarMileage == -1 && car.CarAge == -1)
         {
-            carSummary =  "Registration:\t" + car.CarReg + "\nMake:\t\t" + car.CarMake + "\nModel:\t\t" + car.CarModel + "\nMileage:\nAge:\nColour:\t\t" + car.CarColour + "\nFeatures:\t" + car.CarFeatures;
+            carSummary =  "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\nAge:\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
         else if (car.CarMileage == -1 && car.CarAge != -1)
         {
-            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t" + car.CarMake + "\nModel:\t\t" + car.CarModel + "\nMileage:\nAge:\t\t" + car.CarAge + "\nColour:\t\t" + car.CarColour + "\nFeatures:\t" + car.CarFeatures;
+            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\nAge:\t\t\t" + car.CarAge + "\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
         else if(car.CarMileage != -1 && car.CarAge == -1)
         {
-            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t" + car.CarMake + "\nModel:\t\t" + car.CarModel + "\nMileage:\t" + car.CarMileage + "\nAge:\nColour:\t\t" + car.CarColour + "\nFeatures:\t" + car.CarFeatures;
+            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\t\t" + car.CarMileage + "\nAge:\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
         else
         {
-            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t" + car.CarMake + "\nModel:\t\t" + car.CarModel + "\nMileage:\t" + car.CarMileage + "\nAge:\t\t" + car.CarAge + "\nColour:\t\t" + car.CarColour + "\nFeatures:\t" + car.CarFeatures;
+            carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\t\t" + car.CarMileage + "\nAge:\t\t\t" + car.CarAge + "\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
         return carSummary;
     }
