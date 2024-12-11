@@ -18,13 +18,8 @@ public class AddField implements addAllFields{
 
     public String[] tempCarDetails = new String[7];
 
-    //Car car = new Car();
-
-    //private String currentCar;
-
     public void addCarReg()
     {
-        //Car car = new Car();
         do { 
             System.out.println("What is the registatration plate of the car you would like to add? *"); //required
             MenuSelection.userInput = scanner.nextLine().toUpperCase().replace(" ","");
@@ -36,11 +31,9 @@ public class AddField implements addAllFields{
             }
             else if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
             {
-                //for (Car c : MenuSelection.carDetailList)
                 for (int i = 0 ; i < MenuSelection.carDetailList.size() ; i++) //using a for each gets a concurrentmodificationexception
                 {
                     Car c = MenuSelection.carDetailList.get(i);
-                    //String currentReg = c.getCarReg();
                     if (MenuSelection.userInput.equals(c.getCarReg()))
                     {
                         System.out.println("Sorry, this car has already been added.");
@@ -54,10 +47,7 @@ public class AddField implements addAllFields{
                 }
                 if(duplicateCar == false)
                 {
-                    // MenuSelection.carDetailList.add(new Car());
-                    // car.setCarReg(MenuSelection.userInput);
                     tempCarDetails[0] = MenuSelection.userInput;
-                    //currentCar = MenuSelection.userInput;
                     validInput = true;
                 }
                 else
@@ -76,7 +66,6 @@ public class AddField implements addAllFields{
 
     public void addCarMake()
     {
-        //Car car = new Car();
         do
         {
             System.out.println("What is the make of " + tempCarDetails[0] + "? *"); //required
@@ -124,8 +113,6 @@ public class AddField implements addAllFields{
                 if(MenuSelection.userInput.equals(""))
                 {
                     System.out.println("Question skipped. To add a mileage to this car, make use of option 4 or 5.");
-                    
-                    
                 }
                 else if(TryParseInt.tryParseInt(MenuSelection.userInput) < 0 ) //includes -1 which is returned upon parse failure
                 {

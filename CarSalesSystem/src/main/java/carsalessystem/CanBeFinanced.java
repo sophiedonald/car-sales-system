@@ -12,7 +12,6 @@ public class CanBeFinanced extends CanBeSold {
     private int FinanceDuration;
 
     public CanBeFinanced() {
-
     }
 
     public CanBeFinanced(int financeDuration, CanBeSold canBeSold) {
@@ -39,15 +38,6 @@ public class CanBeFinanced extends CanBeSold {
         return this.FinanceDuration;
     }
 
-    // public CanBeFinanced(int financeDuration, double cashPrice, String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){
-    //     super(cashPrice, carReg, carMake, carModel, carMileage, carAge, carColour, carFeatures);
-    //     this.FinanceDuration = financeDuration;
-    //     this.FinanceDeposit = 0.3 * cashPrice;
-    //     this.FinanceTotalPayment = this.getCashPrice() + this.FinanceTotalInterest;
-    //     this.FinanceMonthlyPayment = this.FinanceTotalPayment / this.FinanceDuration;
-    //     this.FinanceTotalInterest = this.getCashPrice() * this.FinanceInterestPercetage;
-    // }
-
     public void AddFinanceInfo(CanBeSold canBeSold) {
         int newFinanceDuration = 0;
         do {
@@ -69,7 +59,6 @@ public class CanBeFinanced extends CanBeSold {
         MenuSelection.carFinanceList.add(newFinance);
         System.out.println(newFinance.displayDetails(newFinance));
     }
-
 
     public String displayDetails(CanBeFinanced canBeFinanced) {
         return String.format("\tFinance Duration: %d months\n\tInitial Deposit: £%.2f\n\tMonthly Payment: £%.2f\n\tTotal Payment: £%.2f (Interest rate %.2f%%)", canBeFinanced.FinanceDuration, canBeFinanced.FinanceDeposit, canBeFinanced.FinanceMonthlyPayment, canBeFinanced.FinanceTotalPayment, canBeFinanced.FinanceInterestPercentage * 100);

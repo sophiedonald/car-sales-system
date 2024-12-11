@@ -143,18 +143,8 @@ public class Car implements IDisplayDetails{
 
     public boolean contains(Car car, String searchTerm){
         boolean bool = false;
-        // for (Object property : carProperties.values()) {
-        //     if (property.toString().contains(searchTerm))
-        //     {
-        //         bool = true;
-        //         break;
-        //     }
-        //     else
-        //     {
-        //         bool = false;
-        //     }
-        // }
-        
+
+        //search through all the car fields for the searchterm which is passed in
         if (getCarReg().contains(searchTerm)
             || getCarMake().contains(searchTerm)
             || getCarModel().contains(searchTerm)
@@ -167,8 +157,4 @@ public class Car implements IDisplayDetails{
         }
         return bool;
     }
-
-    // public void amend(Car carToBeAmended, CanBeSold canBeSold){
-
-    // }
 }

@@ -94,7 +94,6 @@ public class MenuSelection {
         }
 
         if (anotherCar && Car.getCarCount() < maxCars) {
-            // carDetailList.add(new Car());
             addField.addCarReg();
             if (addField.duplicateCar == false) {
                 addField.addCarMake();
@@ -112,13 +111,10 @@ public class MenuSelection {
 
                 System.out.println(c.displayDetails(carDetailList.get(carDetailList.size() - 1)));
 
-                //System.out.println("Registration:\t" + addField.tempCarDetails[0] + "\nMake:\t\t" + addField.tempCarDetails[1] + "\nModel:\t\t" + addField.tempCarDetails[2] + "\nMileage:\t" + addField.tempCarDetails[3] + "\nAge:\t\t" + addField.tempCarDetails[4] + "\nColour:\t\t" + addField.tempCarDetails[5] + "\nFeatures:\t" + addField.tempCarDetails[6]);
-
                 do {
                     System.out.println("\nWould you like to add " + addField.tempCarDetails[0] + " to the Vroom Vroom Vault? y/n");
                     userInput = scanner.nextLine();
                     if (userInput.startsWith("y")) {
-                        // carDetailList.add(new Car(addField.tempCarDetails[0], addField.tempCarDetails[1], addField.tempCarDetails[2], TryParseInt.tryParseInt(addField.tempCarDetails[3]), TryParseInt.tryParseInt(addField.tempCarDetails[4]), addField.tempCarDetails[5], addField.tempCarDetails[6]));
                         System.out.println(addField.tempCarDetails[0] + " has successfully been added to the Vroom Vroom Vault");
                     } else if (userInput.startsWith("n")) {
                         System.out.println(addField.tempCarDetails[0] + "will not be added and has been removed from the system.");
@@ -159,7 +155,6 @@ public class MenuSelection {
             System.out.println("Vroom Vroom Vault currently has 0 cars in stock. You cannot delete a car at this time.");
         }
 
-        //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//deleteExistingCar
@@ -174,7 +169,6 @@ public class MenuSelection {
         }
 
         System.out.println("All checks complete");
-        //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//checkExistingFields
@@ -235,8 +229,6 @@ public class MenuSelection {
             System.out.println("Sorry, this car does not exist.");
 
         }
-
-        //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//
@@ -263,8 +255,6 @@ public class MenuSelection {
         else
             System.out.println(numberOfMatches + " matches found for search term: " + userInput);
 
-
-        //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }
@@ -300,7 +290,6 @@ public class MenuSelection {
             scanner.nextLine();
             return;
         }
-
 
         for (CanBeSold CBS : carCashPriceList) {
             if (CBS.getCarReg().equals(regToUseAsID)) {
@@ -362,14 +351,6 @@ public class MenuSelection {
                         }
                     } while (!valid);
                 } else if (userInput.startsWith("N")) {
-//                    do{
-//                        System.out.println("Would you like to add finance information for " + carDetailList.get((indexToView)).getCarReg() + "?");
-//                        userInput = scanner.nextLine().toUpperCase();
-//                        if (userInput.startsWith("Y")) {
-//                            canBeFinanced.AddFinanceInfo(carToBeViewed);
-//                        }
-//                    }
-//                    while (!(userInput.startsWith("Y") || userInput.startsWith("N")));
                 }
             }
             while (!(userInput.startsWith("Y") || userInput.startsWith("N")));
@@ -409,8 +390,6 @@ public class MenuSelection {
             }
         }
 
-
-        //System.out.println("COMING SOON");
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }//viewFinance
@@ -420,9 +399,6 @@ public class MenuSelection {
             for (CanBeFinanced financeRecord : carFinanceList) {
                 System.out.print(financeRecord.getCarReg() + " Cash Price: £" + financeRecord.getCashPrice());
                 System.out.print("\tFinance Duration: " + financeRecord.getFinanceDuration() + " months");
-//                System.out.print("\tInitial Deposit: £" + financeRecord.FinanceDeposit);
-//                System.out.print("\tMonthly Payment: £" + financeRecord.FinanceMonthlyPayment);
-//                System.out.print("\tTotal Payment: £" + financeRecord.FinanceTotalPayment);
                 System.out.print("\tInterest rate: " + (financeRecord.getFinanceInterestPercentage() * 100) + "%");
                 System.out.println();
             }
@@ -432,165 +408,4 @@ public class MenuSelection {
         System.out.println("Press enter to continue");
         scanner.nextLine();
     }
-
-
-    // private void viewFinanceRecord(){ //add or edit finance information
-
-    //     int editFinanceInfo;
-    //     CanBeSold canBeSold = new CanBeSold();
-
-    //     for (Car car : carDetailList){
-    //         System.out.print((carDetailList.indexOf(car) + 1) + ": ");
-    //         System.out.println(car.getCarReg());
-    //     }
-    //     System.out.println("Which car would you like to add finance information to? (1 - " + carDetailList.size() + "). Press any other key to cancel");
-    //     userInput = scanner.nextLine();
-
-    //     try {
-    //         editFinanceInfo = TryParseInt.tryParseInt(userInput) - 1;
-    //     }
-    //     catch (IndexOutOfBoundsException ex)
-    //     {
-    //         System.out.println("Sorry, this car does not exist.");
-    //         System.out.println("Press enter to continue");
-    //         scanner.nextLine();
-    //         return;
-    //     }
-
-    //     //if (canBeSold.getCashPrice() != 0d)
-    //         //{
-    //             double newCashPrice = 0;
-    //             System.out.printf("Cash price (%s): £%.2f%n", carDetailList.get(editFinanceInfo).getCarReg(), canBeSold.getCashPrice());
-    //             do
-    //             {
-    //                 System.out.println("Would you like to change this? y/n");
-    //                 userInput = scanner.nextLine().trim().toUpperCase();
-
-    //             }
-    //             while(!(userInput.equals("Y") || userInput.equals("N")));
-    //             if(userInput.equals("Y"))
-    //             {
-    //                 boolean valid = false;
-    //                 do
-    //                 {
-    //                     try
-    //                     {
-    //                         System.out.println("Enter new cash price:");
-    //                         newCashPrice = scanner.nextDouble();
-    //                         scanner.nextLine();
-    //                         valid = true;
-    //                     }
-    //                     catch (InputMismatchException ex)
-    //                     {
-    //                         valid = false;
-    //                         scanner.nextLine();
-
-    //                     }
-    //                 }
-    //                 while(!valid);
-    //             }
-    //             System.out.printf("Cash price for %s has successfully been set to £%.2f", carDetailList.get(editFinanceInfo).getCarReg(), newCashPrice);
-
-    //             int newFinanceDuration = 24;
-    //             // ? System.out.printf("\nFinance duration (%s): %s months", carDetailList.get(editFinanceInfo).getCarReg(), canBeSold.getFinanceDuration());
-    //             do
-    //             {
-    //                 System.out.println("\nWould you like to change this? y/n");
-    //                 userInput = scanner.nextLine().trim().toUpperCase();
-
-    //             }
-    //             while(!(userInput.equals("Y") || userInput.equals("N")));
-    //             if(userInput.equals("Y"))
-    //             {
-    //                 boolean valid = false;
-    //                 do
-    //                 {
-    //                     try
-    //                     {
-    //                         System.out.println("Enter new duration:");
-    //                         newFinanceDuration = scanner.nextInt();
-    //                         valid = true;
-    //                     }
-    //                     catch (InputMismatchException ex)
-    //                     {
-    //                         valid = false;
-    //                         scanner.nextLine();
-
-    //                     }
-    //                 }
-    //                 while(!valid);
-    //             }
-    //             // canBeSold.setFinanceDuration(newFinanceDuration);
-    //             // ? carCashPriceList.add(new CanBeSold(carDetailList.get(editFinanceInfo), newCashPrice, newFinanceDuration));
-    //             // canBeSold.setCashPrice(newCashPrice);
-
-    //}
-    //else
-    // {
-    // System.out.println("add section here");
-    // }
-
-
-    // boolean carIsCanBeSold = false;
-    // for (CanBeSold caneSold : carCashPriceList)
-    // {
-    //     for (Car car : carDetailList)
-    //     {
-    //         if(car.getCarReg().equals(canBeSold.getCarReg()))
-    //         {
-    //             carIsCanBeSold = true;
-    //             return;
-    //         }
-    //         else
-    //         {
-    //             System.out.println("no finance info found");
-    //         }
-    //     }
-    // }
-
-    // if(carIsCanBeSold)
-    // {
-    //     System.out.println("Currently in finance edit mode for " + carDetailList.get((editFinanceInfo)).getCarReg() + ".");
-    //     //System.out.printf("Cash price (" + carDetailList.get((editFinanceInfo)).getCarReg() + "): %.2f" + canBeSold.getCashPrice());
-    //     if (canBeSold.getCashPrice() != 0d)
-    //     {
-    //         System.out.printf("Cash price (%s): £%.2f%n", carDetailList.get(editFinanceInfo).getCarReg(), canBeSold.getCashPrice());
-    //         do
-    //         {
-    //             System.out.println("Would you like to change this? y/n");
-    //             userInput = scanner.nextLine().trim().toUpperCase();
-
-    //         }
-    //         while(!(userInput.equals("Y") || userInput.equals("N")));
-    //         if(userInput.equals("Y"))
-    //         {
-    //             boolean valid = false;
-    //             double newCashPrice;
-    //             do
-    //             {
-    //                 try
-    //                 {
-    //                     System.out.println("Enter new cash price:");
-    //                     newCashPrice = scanner.nextDouble();
-    //                     canBeSold.setCashPrice(newCashPrice);
-    //                     valid = true;
-    //                 }
-    //                 catch (InputMismatchException ex)
-    //                 {
-    //                     valid = false;
-    //                     scanner.nextLine();
-    //                 }
-    //             }
-    //             while(!valid);
-    //         }
-    //     }
-    //     else
-    //     {
-    //         System.out.println("add finance info here");
-    //     }
-    // }
-
-    // System.out.println("COMING SOON");
-    // System.out.println("Press enter to continue");
-    // scanner.nextLine();
-}//viewFinanceRecord
+}

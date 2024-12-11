@@ -6,12 +6,9 @@ public class CarSalesSystem{
             MenuSelection.carDetailList.add(new Car("HL68CDK", "Renault", "Clio",42000,5,"Blue","aircon"));
             MenuSelection.carDetailList.add(new Car("ML12GZO", "Vauxhall", "Corsa", 55000, 12, "Red", "radio"));
 
-
             System.out.println("_________________________________");
             System.out.println("Welcome to the Vroom Vroom Vault!");
             
-            //TryParseInt.tryParseInt("2");
-
             do
             {
                 MenuSelection menuSelection = new MenuSelection();
