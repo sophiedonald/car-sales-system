@@ -193,8 +193,15 @@ public class AddField implements addAllFields{
             MenuSelection.userInput = scanner.nextLine().toUpperCase();
             if (MenuSelection.userInput != null)
             {
-                tempCarDetails[5] = MenuSelection.userInput;
-                validInput = true;
+                if(MenuSelection.userInput.equals(""))
+                {
+                    System.out.println("Question skipped. To add a colour to this car, make use of option 5.");
+                }
+                else
+                {
+                    tempCarDetails[5] = MenuSelection.userInput;
+                    validInput = true;
+                }
             }
             else
             {
