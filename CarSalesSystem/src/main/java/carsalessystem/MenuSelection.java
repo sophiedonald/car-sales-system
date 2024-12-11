@@ -379,7 +379,7 @@ public class MenuSelection {
                 } else {
                     System.out.println("Latest finance info: " + financeRecordsWithMatchingReg.getLast().displayDetails(financeRecordsWithMatchingReg.getLast()));
                     do {
-                        System.out.println("Would you like to change the finance duration?");
+                        System.out.println("Would you like to change the finance duration? y/n");
                         userInput = scanner.nextLine().toUpperCase();
                         if (userInput.startsWith("Y")) {
                             canBeFinanced.AddFinanceInfo(cashRecordsWithMatchingReg.getLast());
@@ -395,13 +395,29 @@ public class MenuSelection {
     }//viewFinance
 
     public void viewFinanceRecord() {
+        if(!carCashPriceList.isEmpty()) {
+            System.out.println("Cash price changes:");
+            for (CanBeSold cashPriceRecord : carCashPriceList) {
+                System.out.print(cashPriceRecord.getCarReg());
+                System.out.println("\tCash Price: " + cashPriceRecord.getCashPrice());
+            }
+            System.out.println("---------------------------");
+        }
+        else{
+            System.out.println("There is no cash price records are available");
+        }
+
+
         if (!carFinanceList.isEmpty()) {
+            System.out.println("Finance record changes:");
             for (CanBeFinanced financeRecord : carFinanceList) {
                 System.out.print(financeRecord.getCarReg() + " Cash Price: £" + financeRecord.getCashPrice());
-                System.out.print("\tFinance Duration: " + financeRecord.getFinanceDuration() + " months");
-                System.out.print("\tInterest rate: " + (financeRecord.getFinanceInterestPercentage() * 100) + "%");
+                System.out.print("\t\tFinance duration: " + financeRecord.getFinanceDuration() + " months");
+                System.out.print("\t\tMonthly payment: " + financeRecord.getFinanceDurationMonthlyPayment());
+                System.out.print("\t\tInterest rate: " + (CanBeFinanced.getFinanceInterestPercentage() * 100) + "%");
                 System.out.println();
             }
+            System.out.println("---------------------------");
         } else {
             System.out.println("There is no finance information for any car available.");
         }

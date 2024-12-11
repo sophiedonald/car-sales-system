@@ -38,6 +38,8 @@ public class CanBeFinanced extends CanBeSold {
         return this.FinanceDuration;
     }
 
+    public double getFinanceDurationMonthlyPayment() {return this.FinanceMonthlyPayment;}
+
     public void AddFinanceInfo(CanBeSold canBeSold) {
         int newFinanceDuration = 0;
         do {
