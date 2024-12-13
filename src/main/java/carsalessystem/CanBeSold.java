@@ -17,6 +17,7 @@ public class CanBeSold extends Car {
         this.setCarModel(car.getCarModel());
         this.setCarMileage(car.getCarMileage());
         this.setCarAge(car.getCarAge());
+        this.setCarColour(car.getCarColour());
         this.setCarFeatures(car.getCarFeatures());
     }
 
@@ -57,7 +58,7 @@ public class CanBeSold extends Car {
                 System.out.println("Invalid entry. Please enter a new cash price");
             }
         }
-        while (validInput == false);
+        while (!validInput);
 
         MenuSelection.carCashPriceList.add(new CanBeSold(newCashPrice, car));
     }

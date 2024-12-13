@@ -1,6 +1,6 @@
 package carsalessystem;
 import java.util.Scanner;
-interface addAllFields{
+interface addAllFields{ //checklist to ensure all fields are included (not overloaded)
     public void addCarReg();
     public void addCarMake();
     public void addCarModel();
@@ -21,7 +21,7 @@ public class AddField implements addAllFields{
     public void addCarReg()
     {
         do { 
-            System.out.println("What is the registatration plate of the car you would like to add? *"); //required
+            System.out.println("What is the registration plate of the car you would like to add? *"); //required
             MenuSelection.userInput = scanner.nextLine().toUpperCase().replace(" ","");
 
             if(MenuSelection.userInput.trim().length() > 7)
@@ -29,7 +29,7 @@ public class AddField implements addAllFields{
                 System.out.println("A registration plate cannot be longer than 6 characters. Please make sure you enter the correct registration number.");
                 validInput = false;
             }
-            else if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
+            else if (!MenuSelection.userInput.equalsIgnoreCase(""))
             {
                 for (int i = 0 ; i < MenuSelection.carDetailList.size() ; i++) //using a for each gets a concurrentmodificationexception
                 {
@@ -45,7 +45,7 @@ public class AddField implements addAllFields{
                         duplicateCar = false;
                     }
                 }
-                if(duplicateCar == false)
+                if(!duplicateCar)
                 {
                     tempCarDetails[0] = MenuSelection.userInput;
                     validInput = true;
@@ -61,7 +61,7 @@ public class AddField implements addAllFields{
             {
                 validInput = false;
             }
-        } while (validInput == false);
+        } while (!validInput);
     }
 
     public void addCarMake()
@@ -70,7 +70,7 @@ public class AddField implements addAllFields{
         {
             System.out.println("What is the make of " + tempCarDetails[0] + "? *"); //required
             MenuSelection.userInput = scanner.nextLine().toUpperCase();
-            if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
+            if (!MenuSelection.userInput.isEmpty())
             {
                 tempCarDetails[1] = MenuSelection.userInput.trim();
                 validInput = true;
@@ -80,7 +80,7 @@ public class AddField implements addAllFields{
                 validInput = false;
             }
         }
-        while (validInput == false);
+        while (!validInput);
     }
 
     public void addCarModel()
@@ -89,7 +89,7 @@ public class AddField implements addAllFields{
         {
             System.out.println("What is the model of " + tempCarDetails[0] + "? *"); //required
             MenuSelection.userInput = scanner.nextLine().toUpperCase();
-            if (!((MenuSelection.userInput == null) || MenuSelection.userInput.equalsIgnoreCase("")))
+            if (!MenuSelection.userInput.isEmpty())
             {
                 tempCarDetails[2] = MenuSelection.userInput;
                 validInput = true;
@@ -99,34 +99,21 @@ public class AddField implements addAllFields{
                 validInput = false;
             }
         }
-        while (validInput == false);
+        while (!validInput);
     }
 
     public void addCarMileage()
     {
-        do
+        System.out.println("What is the mileage of " + tempCarDetails[0] + "? Press enter if unsure"); //not required
+        MenuSelection.userInput = scanner.nextLine().toUpperCase();
+        if (MenuSelection.userInput.isEmpty()) {
+            System.out.println("Question skipped. To add a mileage to this car, make use of option 4 or 5.");
+        } else if (TryParseInt.tryParseInt(MenuSelection.userInput) < 0) //includes -1 which is returned upon parse failure
         {
-            System.out.println("What is the mileage of " + tempCarDetails[0] + "? Press enter if unsure"); //not required
-            MenuSelection.userInput = scanner.nextLine().toUpperCase();
-            if (MenuSelection.userInput != null)
-            {
-                if(MenuSelection.userInput.equals(""))
-                {
-                    System.out.println("Question skipped. To add a mileage to this car, make use of option 4 or 5.");
-                }
-                else if(TryParseInt.tryParseInt(MenuSelection.userInput) < 0 ) //includes -1 which is returned upon parse failure
-                {
-                    System.out.println("Invalid entry. Please make use of the (4: Check all fields are complete) or (5: Edit fields) options to amend this later on.");
-                }
-                tempCarDetails[3] = MenuSelection.userInput;
-                validInput = true;
-            }
-            else
-            {
-                validInput = false;
-            }
+            System.out.println("Invalid entry. Please make use of the (4: Check all fields are complete) or (5: Edit fields) options to amend this later on.");
         }
-        while (validInput == false);
+        tempCarDetails[3] = MenuSelection.userInput;
+        validInput = true;
     }
 
     public void addCarMileage(Car c) //overloaded method
@@ -147,7 +134,7 @@ public class AddField implements addAllFields{
             MenuSelection.userInput = scanner.nextLine();
             if (MenuSelection.userInput != null)
             {
-                if(MenuSelection.userInput.equals(""))
+                if(MenuSelection.userInput.isEmpty())
                 {
                     System.out.println("Question skipped. To add a mileage to this car, make use of option 4 or 5.");
                 }
@@ -171,7 +158,7 @@ public class AddField implements addAllFields{
                 validInput = false;
             }
         }
-        while (validInput == false);
+        while (!validInput);
     }
 
     public void addCarAge(Car c) //overloaded method

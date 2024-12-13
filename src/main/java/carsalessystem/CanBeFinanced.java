@@ -4,10 +4,9 @@ import java.util.InputMismatchException;
 
 public class CanBeFinanced extends CanBeSold {
 
-    private static double FinanceInterestPercentage = 9.55 / 100d; //hardcoded interest percentage
+    private static final double FinanceInterestPercentage = 9.55 / 100d; //hardcoded interest percentage
     private double FinanceDeposit;
     private double FinanceMonthlyPayment;
-    private double FinanceTotalInterest;
     private double FinanceTotalPayment;
     private int FinanceDuration;
 
@@ -17,7 +16,6 @@ public class CanBeFinanced extends CanBeSold {
     public CanBeFinanced(int financeDuration, CanBeSold canBeSold) {
         this.FinanceDuration = financeDuration;
         this.FinanceDeposit = 0.3 * canBeSold.getCashPrice();
-        this.FinanceTotalInterest = canBeSold.getCashPrice() * getFinanceInterestPercentage();
         this.FinanceTotalPayment = canBeSold.getCashPrice() + (canBeSold.getCashPrice() * getFinanceInterestPercentage());
         this.FinanceMonthlyPayment = (canBeSold.getCashPrice() + (canBeSold.getCashPrice() * getFinanceInterestPercentage())) / financeDuration;
 
@@ -27,6 +25,7 @@ public class CanBeFinanced extends CanBeSold {
         this.setCarModel(canBeSold.getCarModel());
         this.setCarMileage(canBeSold.getCarMileage());
         this.setCarAge(canBeSold.getCarAge());
+        this.setCarColour(canBeSold.getCarColour());
         this.setCarFeatures(canBeSold.getCarFeatures());
     }
 
@@ -37,6 +36,12 @@ public class CanBeFinanced extends CanBeSold {
     public int getFinanceDuration() {
         return this.FinanceDuration;
     }
+
+    public double getFinanceTotalPayment() {return this.FinanceTotalPayment;}
+
+    public double getFinanceMonthlyPayment() {return this.FinanceMonthlyPayment;}
+
+    public double getFinanceDeposit() {return this.FinanceDeposit;}
 
     public double getFinanceDurationMonthlyPayment() {return this.FinanceMonthlyPayment;}
 
@@ -63,6 +68,6 @@ public class CanBeFinanced extends CanBeSold {
     }
 
     public String displayDetails(CanBeFinanced canBeFinanced) {
-        return String.format("\tFinance Duration: %d months\n\tInitial Deposit: £%.2f\n\tMonthly Payment: £%.2f\n\tTotal Payment: £%.2f (Interest rate %.2f%%)", canBeFinanced.FinanceDuration, canBeFinanced.FinanceDeposit, canBeFinanced.FinanceMonthlyPayment, canBeFinanced.FinanceTotalPayment, canBeFinanced.FinanceInterestPercentage * 100);
+        return String.format("\tFinance Duration: %d months\n\tInitial Deposit: £%.2f\n\tMonthly Payment: £%.2f\n\tTotal Payment: £%.2f (Interest rate %.2f%%)", canBeFinanced.FinanceDuration, canBeFinanced.FinanceDeposit, canBeFinanced.FinanceMonthlyPayment, canBeFinanced.FinanceTotalPayment, FinanceInterestPercentage * 100);
     }
 }

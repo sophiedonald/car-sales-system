@@ -30,7 +30,7 @@ public class Car implements IDisplayDetails{
         {
             this.CarAge = carAge;
         }
-        this.CarColour = carColour == null ? "" : carColour.toUpperCase();
+        this.CarColour = (carColour == null ? "" : carColour.toUpperCase());
         this.CarFeatures = carFeatures == null ? "" : carFeatures.toUpperCase();
 
         carCount++;
@@ -128,7 +128,7 @@ public class Car implements IDisplayDetails{
         {
             carSummary =  "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\nAge:\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
-        else if (car.CarMileage == -1 && car.CarAge != -1)
+        else if (car.CarMileage == -1 && car.CarAge != -1) //implicit declarations to increase
         {
             carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\nAge:\t\t\t" + car.CarAge + "\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
