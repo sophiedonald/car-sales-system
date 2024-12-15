@@ -3,9 +3,6 @@ package carsalessystem;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
-import java.util.Scanner;
 
 class CanBeSoldTest {
 
@@ -14,14 +11,14 @@ class CanBeSoldTest {
 
     @BeforeEach
     void setUp() {
-        // Initialize the specific car details you provided
+        // Initialize the car object
         baseCar = new Car("AA18SHH", "Lamborghini", "Huracan", 1000, 1, "Jet Black", "Gintani Exhaust");
         carForSale = new CanBeSold(150000, baseCar);  // Assuming a price of £150,000 for this example
     }
 
     @Test
     void testConstructorWithCarObject() {
-        CanBeSold canBeSold = new CanBeSold(150000, baseCar);
+        // Test the constructor works right when passing in cashprice and a car object
         assertEquals(150000, carForSale.getCashPrice());
         assertEquals("AA18SHH", carForSale.getCarReg());
         assertEquals("LAMBORGHINI", carForSale.getCarMake());
@@ -34,6 +31,7 @@ class CanBeSoldTest {
 
     @Test
     void testConstructorWithDetails() {
+        // test the constructor when passing in all the info including the super class Car
         CanBeSold car = new CanBeSold(150000, "BB19JNK", "Ferrari", "488 GTB", 2000, 2, "Red", "Sport Package");
         assertEquals(150000, car.getCashPrice());
         assertEquals("BB19JNK", car.getCarReg());

@@ -12,18 +12,19 @@ class CanBeFinancedTest {
 
     @BeforeEach
     void setUp() {
-        // Set up a CanBeSold object to test with
+        // Set up a CanBeSold object using individual setters to test those aswell
         canBeSold = new CanBeSold();
-        canBeSold.setCashPrice(20000); // Set a cash price for the car
+        canBeSold.setCashPrice(20000);
         canBeSold.setCarReg("ABC123");
         canBeSold.setCarMake("Toyota");
         canBeSold.setCarModel("Camry");
         canBeSold.setCarMileage(50000);
         canBeSold.setCarAge(5);
+        canBeSold.setCarColour("Blue");
         canBeSold.setCarFeatures("Leather seats, Sunroof");
 
         // Initialize CanBeFinanced object with a duration
-        canBeFinanced = new CanBeFinanced(36, canBeSold); // 36-month finance duration
+        canBeFinanced = new CanBeFinanced(36, canBeSold); // 36 month finance duration
     }
 
     @Test
@@ -33,7 +34,7 @@ class CanBeFinancedTest {
         double expectedTotalPayment = canBeSold.getCashPrice() + (canBeSold.getCashPrice() * CanBeFinanced.getFinanceInterestPercentage());
         double expectedMonthlyPayment = expectedTotalPayment / canBeFinanced.getFinanceDuration();
 
-        assertEquals(expectedDeposit, canBeFinanced.getFinanceDeposit(), 0.01);
+        assertEquals(expectedDeposit, canBeFinanced.getFinanceDeposit(), 0.01); // with 0.1 allowance for rounding errors
         assertEquals(expectedTotalPayment, canBeFinanced.getFinanceTotalPayment(), 0.01);
         assertEquals(expectedMonthlyPayment, canBeFinanced.getFinanceMonthlyPayment(), 0.01);
     }

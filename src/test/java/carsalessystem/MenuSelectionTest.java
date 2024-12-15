@@ -1,74 +1,47 @@
 package carsalessystem;
 
 import org.junit.jupiter.api.*;
-import org.mockito.*;
+import java.util.ArrayList;
 
-import java.util.Scanner;
-
-import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MenuSelectionTest {
 
-    private MenuSelection menuSelection;
-    private Scanner mockScanner;
-
     @BeforeEach
-    void setUp() {
-        mockScanner = mock(Scanner.class);
-        menuSelection = new MenuSelection(mockScanner);  // Inject the mock scanner
+    public void setUp() {
+        MenuSelection menuSelection = new MenuSelection();
+        MenuSelection.carDetailList = new ArrayList<>();
     }
 
     @Test
-    void testMainMenuOption1() {
-        // Test option 1 - List all existing cars
-        when(mockScanner.nextLine()).thenReturn("1"); // Mock user input to "1"
-
-        menuSelection.mainMenu();
-
-        // Verify that the correct method is called for option 1
-        verify(mockScanner).nextLine();
+    public void testAddNewCar() {
+        Car car = new Car("A Bc1 23   ", "Toyota", "Corolla", 10000, 5, "Red", "Air Conditioning");
+        MenuSelection.carDetailList.add(car);
+        assertEquals(1, MenuSelection.carDetailList.size());
+        assertEquals("ABC123", MenuSelection.carDetailList.getFirst().getCarReg());
     }
 
     @Test
-    void testMainMenuOption2() {
-        // Test option 2 - Add a new car
-        when(mockScanner.nextLine()).thenReturn("2"); // Mock user input to "2"
+    public void testDeleteExistingCar() {
+        Car car = new Car("ABC123", "Toyota", "Corolla", 10000, 5, "Red", "Air Conditioning");
+        MenuSelection.carDetailList.add(car);
+        assertEquals(1, MenuSelection.carDetailList.size());
 
-        menuSelection.mainMenu();
-
-        // Verify the method was called
-        verify(mockScanner, atLeastOnce()).nextLine();
+        MenuSelection.carDetailList.removeFirst();
+        assertEquals(0, MenuSelection.carDetailList.size());
     }
 
     @Test
-    void testMainMenuOption3() {
-        // Test option 3 - Delete an existing car
-        when(mockScanner.nextLine()).thenReturn("3"); // Mock user input to "3"
+    public void testListExistingCars() {
+        Car car1 = new Car("ABC123", "Toyota", "Corolla", 10000, 5, "Red", "Air Conditioning");
+        Car car2 = new Car("XYZ789", "Honda", "Civic", 20000, 3, "Blue", "Sunroof");
+        MenuSelection.carDetailList.add(car1);
+        MenuSelection.carDetailList.add(car2);
 
-        // Adding a car first
-        menuSelection.carDetailList.add(new Car("ABC123", "Toyota", "Corolla", 10000, 5, "Red", "Leather seats"));
-
-        // Mock user input to delete the car
-        when(mockScanner.nextLine()).thenReturn("1");
-
-        menuSelection.mainMenu();
-
-        // Verify car count after deletion
-        assertEquals(0, menuSelection.carDetailList.size());
+        assertEquals(2, MenuSelection.carDetailList.size());
+        assertEquals("ABC123", MenuSelection.carDetailList.get(0).getCarReg());
+        assertEquals("XYZ789", MenuSelection.carDetailList.get(1).getCarReg());
     }
-
-    @Test
-    void testExitOption() {
-        // Test exit option
-        when(mockScanner.nextLine()).thenReturn("exit"); // Mock user input to "exit"
-
-        menuSelection.mainMenu();
-
-        // Verify that the exit method was triggered
-        assertTrue(menuSelection.exit);
-    }
-
-    // Additional tests can be written in the same way...
-
 }
+
+

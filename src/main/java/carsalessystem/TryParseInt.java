@@ -6,7 +6,7 @@ public class TryParseInt{
             return Integer.parseInt(toBeParsed);
             
         } catch (NumberFormatException e) {
-            return -1;
+            return -1; //if toBeParsed cannot be parsed to an integer
         }
     }
 }

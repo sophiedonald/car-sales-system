@@ -7,7 +7,7 @@ interface IDisplayDetails{
 public class Car implements IDisplayDetails{
 
     //create all fields for the car properties
-    private String CarReg; //if naming static, then all cars have the same reg etc
+    private String CarReg; //if naming static, then all cars have the same reg etc so must be non-static
     private String CarMake;
     private String CarModel;
     private int CarMileage;
@@ -18,7 +18,7 @@ public class Car implements IDisplayDetails{
 
     //constructor used to assign each property of the object
     public Car(String carReg, String carMake, String carModel, int carMileage, int carAge, String carColour, String carFeatures){
-        this.CarReg = carReg.toUpperCase();
+        this.CarReg = carReg.toUpperCase().replace(" ","");
         this.CarMake = carMake.toUpperCase();
         this.CarModel = carModel.toUpperCase();
         this.CarMileage = carMileage;
@@ -47,7 +47,6 @@ public class Car implements IDisplayDetails{
         CarFeatures = null;
     }
 
-    //getters and setters to securely access the values stored in Car objects
     public static int getCarCount() { //can be static because is in the class not the instances/objects
         return carCount;
     }
@@ -61,7 +60,7 @@ public class Car implements IDisplayDetails{
         return this.CarReg;
     }
     public void setCarReg(String reg){
-        this.CarReg = reg.toUpperCase();
+        this.CarReg = reg.toUpperCase().replace(" ","");
     }
 
     //car make
@@ -128,7 +127,7 @@ public class Car implements IDisplayDetails{
         {
             carSummary =  "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\nAge:\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
-        else if (car.CarMileage == -1 && car.CarAge != -1) //implicit declarations to increase
+        else if (car.CarMileage == -1 && car.CarAge != -1) //implicit declarations to increase readability
         {
             carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\nAge:\t\t\t" + car.CarAge + "\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
@@ -140,13 +139,13 @@ public class Car implements IDisplayDetails{
         {
             carSummary = "Registration:\t" + car.CarReg + "\nMake:\t\t\t" + car.CarMake + "\nModel:\t\t\t" + car.CarModel + "\nMileage:\t\t" + car.CarMileage + "\nAge:\t\t\t" + car.CarAge + "\nColour:\t\t\t" + car.CarColour + "\nFeatures:\t\t" + car.CarFeatures;
         }
-        return carSummary;
+        return carSummary; //single return statement
     }
 
     public boolean contains(Car car, String searchTerm){
         boolean bool = false;
 
-        //search through all the car fields for the searchterm which is passed in
+        //search through all the car fields for the searchterm which is passed in from the userinput
         if (getCarReg().contains(searchTerm)
             || getCarMake().contains(searchTerm)
             || getCarModel().contains(searchTerm)
