@@ -37,7 +37,7 @@ git clone https://github.com/sophiedonald/car-sales-system.git
 cd car-sales-system
 ```
 ### 2. Build the project
-If you have gradle installed locally, use `gradle build`. Alternatively, use `gradlew build jar` for Windows or `./gradlew build jar` for MaacOS/Linux
+If you have gradle installed locally, use `gradle build`. Alternatively, use `gradlew build jar` for Windows or `./gradlew build jar` for MacOS/Linux
 ### 3. Run the application
 To run the application, use `java -jar build/libs/CarSalesSystem-1.0-SNAPSHOT.jar`
 The main class can be found in `src/main/java/carsalessystem`
@@ -46,3 +46,4 @@ To run the unit tests, use `gradlew test` for Windows and `./gradlew test` for M
 The unit tests can be found in `src/test/java/carsalessystem`
 ## Usage
 After running the project, navigate through the main menu to explore all features of the application
+Note: the format of the \t indents when displaying the car information in mainmmenu option 1 will display differently when ran in command window and in IDEs
