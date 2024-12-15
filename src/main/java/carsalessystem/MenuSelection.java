@@ -28,7 +28,7 @@ public class MenuSelection {
         System.out.println("8: View a record of all finance information changes");
         System.out.println("Which option would you like to choose? (type exit to exit Vroom Vroom Vault)");
 
-        userInput = scanner.nextLine();
+        userInput = scanner.nextLine().trim();
         switch (userInput) {
             case "1": listExistingCars(); break;
             case "2": addNewCar(); break;
