@@ -45,5 +45,4 @@ The main class can be found in `src/main/java/carsalessystem`
 To run the unit tests, use `gradlew test` for Windows and `./gradlew test` for MacOS/Linux
 The unit tests can be found in `src/test/java/carsalessystem`
 ## Usage
-After running the project, navigate through the main menu to explore all features of the application
-Note: the format of the \t indents when displaying the car information in mainmmenu option 1 will display differently when ran in command window and in IDEs
+After running the project, navigate through the main menu to explore all features of the application.
