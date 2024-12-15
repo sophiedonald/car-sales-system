@@ -57,8 +57,7 @@ public class CanBeSold extends Car {
             } catch (Exception ex) {
                 System.out.println("Invalid entry. Please enter a new cash price");
             }
-        }
-        while (!validInput);
+        } while (!validInput);
 
         MenuSelection.carCashPriceList.add(new CanBeSold(newCashPrice, car));
     }

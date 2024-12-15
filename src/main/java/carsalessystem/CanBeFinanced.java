@@ -37,13 +37,21 @@ public class CanBeFinanced extends CanBeSold {
         return this.FinanceDuration;
     }
 
-    public double getFinanceTotalPayment() {return this.FinanceTotalPayment;}
+    public double getFinanceTotalPayment() {
+        return this.FinanceTotalPayment;
+    }
 
-    public double getFinanceMonthlyPayment() {return this.FinanceMonthlyPayment;}
+    public double getFinanceMonthlyPayment() {
+        return this.FinanceMonthlyPayment;
+    }
 
-    public double getFinanceDeposit() {return this.FinanceDeposit;}
+    public double getFinanceDeposit() {
+        return this.FinanceDeposit;
+    }
 
-    public double getFinanceDurationMonthlyPayment() {return this.FinanceMonthlyPayment;}
+    public double getFinanceDurationMonthlyPayment() {
+        return this.FinanceMonthlyPayment;
+    }
 
     public void AddFinanceInfo(CanBeSold canBeSold) {
         int newFinanceDuration = 0;

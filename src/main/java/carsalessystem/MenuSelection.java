@@ -30,14 +30,30 @@ public class MenuSelection {
 
         userInput = scanner.nextLine().trim();
         switch (userInput) {
-            case "1": listExistingCars(); break;
-            case "2": addNewCar(); break;
-            case "3": deleteExistingCar(); break;
-            case "4": checkExistingFields(); break;
-            case "5": editExistingFields(); break;
-            case "6": searchExistingFields(); break;
-            case "7": viewFinance(); break;
-            case "8": viewFinanceRecord(); break;
+            case "1":
+                listExistingCars();
+                break;
+            case "2":
+                addNewCar();
+                break;
+            case "3":
+                deleteExistingCar();
+                break;
+            case "4":
+                checkExistingFields();
+                break;
+            case "5":
+                editExistingFields();
+                break;
+            case "6":
+                searchExistingFields();
+                break;
+            case "7":
+                viewFinance();
+                break;
+            case "8":
+                viewFinanceRecord();
+                break;
             case "exit":
                 System.out.println("Goodbye");
                 exit = true;
@@ -97,12 +113,9 @@ public class MenuSelection {
                 do {
                     System.out.println("\nWould you like to add " + addField.tempCarDetails[0] + " to the Vroom Vroom Vault? y/n");
                     userInput = scanner.nextLine().toUpperCase();
-                    if (userInput.startsWith("Y"))
-                    {
+                    if (userInput.startsWith("Y")) {
                         System.out.println(addField.tempCarDetails[0] + " has successfully been added to the Vroom Vroom Vault");
-                    }
-                    else if (userInput.startsWith("N"))
-                    {
+                    } else if (userInput.startsWith("N")) {
                         System.out.println(addField.tempCarDetails[0] + "will not be added and has been removed from the system.");
                         carDetailList.removeLast();
                     }
@@ -119,8 +132,7 @@ public class MenuSelection {
     void deleteExistingCar() {
         System.out.println("You have chosen option 3: delete a car from the Vroom Vroom Vault.");
 
-        if (!carDetailList.isEmpty())
-        {
+        if (!carDetailList.isEmpty()) {
             System.out.println("Vroom Vroom Vault currently has " + Car.getCarCount() + " cars in stock:");
             for (Car car : carDetailList) {
                 System.out.print((carDetailList.indexOf(car) + 1) + ": ");
@@ -130,19 +142,15 @@ public class MenuSelection {
             System.out.println("Which car would you like to delete? (1 - " + carDetailList.size() + "). Press any other key to cancel");
             userInput = scanner.nextLine();
 
-            try
-            {
+            try {
                 int removeIndex = TryParseInt.tryParseInt(userInput);
                 carDetailList.remove(removeIndex - 1);
                 Car.setCarCount(-1);
                 System.out.println("Successfully removed");
-            }
-            catch (IndexOutOfBoundsException ex) {
+            } catch (IndexOutOfBoundsException ex) {
                 System.out.println("Sorry, this car does not exist.");
             }
-        }
-        else
-        {
+        } else {
             System.out.println("Vroom Vroom Vault currently has 0 cars in stock. You cannot delete a car at this time.");
         }
 
@@ -232,15 +240,12 @@ public class MenuSelection {
         userInput = scanner.nextLine().toUpperCase();
 
         for (Car car : carDetailList) {
-            if (car.contains(car, userInput))
-            {
+            if (car.contains(car, userInput)) {
                 System.out.println("---------------------------");
                 System.out.println(car.displayDetails(car));
                 System.out.println("---------------------------");
                 numberOfMatches++;
-            }
-            else
-            {
+            } else {
                 System.out.println(car.getCarReg() + " does not contain " + userInput);
             }
         }
@@ -278,33 +283,31 @@ public class MenuSelection {
             indexToView = TryParseInt.tryParseInt(userInput) - 1;
             carToAccessFinanceInfo = carDetailList.get(indexToView);
             regToUseAsID = carDetailList.get((indexToView)).getCarReg();
-        } catch (IndexOutOfBoundsException ex){
+        } catch (IndexOutOfBoundsException ex) {
             System.out.println("Sorry, this car does not exist.");
             System.out.println("Press enter to continue");
             scanner.nextLine();
             return;
         }
 
-        for (CanBeSold CBS : carCashPriceList)
-        {
-            if (CBS.getCarReg().equals(regToUseAsID))
-            {
+        for (CanBeSold CBS : carCashPriceList) {
+            if (CBS.getCarReg().equals(regToUseAsID)) {
                 cashRecordsWithMatchingReg.add(CBS);
             }
         }
 
         if (cashRecordsWithMatchingReg.isEmpty()) //if the selected car does NOT have a cash price - therefore doesn't have finance options
         {
-            do{
+            do {
                 System.out.println(carDetailList.get((indexToView)).getCarReg() + " does not have a cash price uploaded yet, would you like to add one now? y/n");
                 userInput = scanner.nextLine().toUpperCase();
-                if (userInput.startsWith("Y")){
+                if (userInput.startsWith("Y")) {
                     canBeSold.AddCashPrice(carToAccessFinanceInfo);
                     userInput = "";
-                    do{
+                    do {
                         System.out.println("Would you like to add financing options for " + carDetailList.get((indexToView)).getCarReg() + "? y/n");
                         userInput = scanner.nextLine().toUpperCase();
-                        if (userInput.startsWith("Y")){
+                        if (userInput.startsWith("Y")) {
                             canBeFinanced.AddFinanceInfo(carCashPriceList.getLast());
                         }
                     } while (!(userInput.startsWith("N") || userInput.startsWith("Y")));
@@ -377,8 +380,7 @@ public class MenuSelection {
                 {
                     System.out.println("You have changed the cash price for " + carDetailList.get((indexToView)).getCarReg() + ". Finance information must be updated.");
                     canBeFinanced.AddFinanceInfo(cashRecordsWithMatchingReg.getLast());
-                }
-                else //if cash price has not changed
+                } else //if cash price has not changed
                 {
                     System.out.println("Latest finance info: " + financeRecordsWithMatchingReg.getLast().displayDetails(financeRecordsWithMatchingReg.getLast()));
                     do {
@@ -398,7 +400,7 @@ public class MenuSelection {
     }//viewFinance
 
     public void viewFinanceRecord() {
-        if(!carCashPriceList.isEmpty()) {
+        if (!carCashPriceList.isEmpty()) {
             System.out.println("---------------------------");
             System.out.println("Cash price changes:");
             for (CanBeSold cashPriceRecord : carCashPriceList) {
@@ -406,8 +408,7 @@ public class MenuSelection {
                 System.out.println("\tCash Price: £" + cashPriceRecord.getCashPrice());
             }
             System.out.println("---------------------------");
-        }
-        else{
+        } else {
             System.out.println("There is no cash price records are available");
         }
 
