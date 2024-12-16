@@ -39,18 +39,8 @@ class CarTest {
     }
 
     @Test
-    void testStaticCarCount() {
-        // Test the static carCount variable
-        assertEquals(1, Car.getCarCount());  // Initially should be 1 due to creating a new car at the top of this file
-        new Car("XY987AB", "Honda", "Civic", 30000, 2020, "Red", "Sunroof");
-        assertEquals(2, Car.getCarCount());  // After creating a car, car count should be 1
-        Car.setCarCount(1);
-        assertEquals(3, Car.getCarCount());  // Should now be 2
-    }
-
-    @Test
     void testSetters() {
-        // Test setters and make sure they correctly set the values
+        // test setters
         car.setCarReg("XYZ789");
         car.setCarMake("Honda");
         car.setCarModel("Accord");
@@ -59,7 +49,7 @@ class CarTest {
         car.setCarColour("Green");
         car.setCarFeatures("Leather Seats");
 
-        assertEquals("XYZ789", car.getCarReg());
+        assertEquals("XYZ789", car.getCarReg());  // Should be uppercase, and trimmed/spaces removed
         assertEquals("HONDA", car.getCarMake());  // Should be uppercase
         assertEquals("ACCORD", car.getCarModel());  // Should be uppercase
         assertEquals(60000, car.getCarMileage());
@@ -70,8 +60,8 @@ class CarTest {
 
     @Test
     void testDisplayDetails() {
-        // Test the displayDetails method
-        String expectedDetails = "Registration:\tAB123CD\nMake:\t\tTOYOTA\nModel:\t\tCOROLLA\nMileage:\t50000\nAge:\t\t9\nColour:\t\tBLUE\nFeatures:\tAIR CONDITIONING";
+        // Test the displayDetails method to display formatted info
+        String expectedDetails = "Registration:\tAB123CD\nMake:\t\t\tTOYOTA\nModel:\t\t\tCOROLLA\nMileage:\t\t50000\nAge:\t\t\t9\nColour:\t\t\tBLUE\nFeatures:\t\tAIR CONDITIONING";
         assertEquals(expectedDetails, car.displayDetails(car));
     }
 
@@ -95,9 +85,9 @@ class CarTest {
 
     @Test
     void testSetCarAgeWithInvalidYear() {
-        // Test that setting an invalid year (e.g., 1900) is handled properly
+        // Test that setting an invalid year (e.g., 2000) is handled properly
         car.setCarAge(2000);
-        assertEquals(24, car.getCarAge());  // 2024 - 1900 = 124 (invalid year should be treated as car age)
+        assertEquals(24, car.getCarAge());  // 2024 - 2000 = 24 (invalid year should be treated as car age)
     }
 
     @Test

@@ -13,6 +13,15 @@ repositories {
 dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.0"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.7.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.7.0")
+
+    // Mockito dependencies for mocking
+    testImplementation("org.mockito:mockito-core:3.9.0")
+
+    // Optional: Add if you're using Mockito with inline mocking (needed for mocking final classes or methods)
+    testImplementation("org.mockito:mockito-inline:3.9.0")
 }
 
 tasks.test {
